@@ -1,0 +1,161 @@
+/* pages/order/order.wxss */
+
+.filter-sort{
+	display: block;
+	background: #fff;
+}
+
+.filter-sort view{
+  /* 筛选项 */
+	flex: 1;
+	line-height: 80rpx;
+	text-indent: 60rpx;
+	max-height: 432rpx;
+	overflow-y: auto;
+	border-bottom: 1rpx solid #e8e8e8;
+}
+.filter-sort view.active{
+  /* 筛选项激活的颜色 */
+	color: #f7982a;
+}
+
+.filter-multiple{
+	flex-direction: column;
+}
+.filter-multiple .group{
+	max-height: 700rpx;
+	overflow: auto;
+}
+.filter-tags{
+	padding: 20rpx;
+}
+.filter-tags text{
+	padding: 20rpx 26rpx;
+	border: 1rpx solid #ddd;
+	display: inline-block;
+	line-height: 1;
+	color: #666;
+	font-size: 28rpx;
+	border-radius: 4rpx;
+	margin: 10rpx;
+	white-space: nowrap;
+}
+.filter-tags text.active{
+	background: #f7982a;
+	color: #fff;
+	border-color: #f7982a;
+}
+.filter-btns{
+	display: flex;
+	padding: 20rpx;
+	border-top: 1rpx solid #ddd;
+	margin-top: -1rpx;
+}
+.filter-btns button{
+	margin: 0 10rpx;
+	line-height: 80rpx;
+}
+.order-item{
+  display: flex;
+  padding: 20rpx;
+	background-color: #ffffff;
+	border-top: 12rpx;
+	border-bottom: 12rpx solid #e8e8e8;
+	border-left: 10rpx solid #e8e8e8;
+	border-right: 10rpx solid #e8e8e8;
+	border-radius: 10px;
+}
+.order-item-img{
+	width: 180rpx;
+	/* height: 180rpx; */
+	/* width: 100%;
+	height: 360rpx; */
+	overflow: hidden;
+	position:  relative;
+}
+.order-item-img text{
+	position: absolute;
+	right: 0;
+	top: 0;
+	background: #07b5e0;
+	color: #fff;
+	font-size: 32rpx;
+	padding: 6rpx 20rpx;
+}
+.order-item-img image{
+	width: 100%;
+	/* height: 100%; */
+}
+.order-item-title{
+	display: flex;
+	font-size: 34rpx;
+	color: #000;
+	padding: 16rpx 0;
+	border-bottom: 1rpx solid #e8e8e8;
+}
+.order-item-title-orderid{
+	margin-left: 24rpx;
+}
+
+
+.order-item-title-orderid-arrow{
+	/* height: 34rpx; */
+	width: 20rpx;
+	color: lightslategray;
+	position:relative;
+	left:30rpx;
+}
+
+.order-item-title-time{
+	margin-left:120rpx;
+	margin-right:12rpx;
+}
+
+.order-item-title-time::before{
+	content: "时间：";
+	font-size: 36rpx;
+	white-space: nowrap;
+}
+
+.order-item-info{
+	display: flex;
+}
+.order-item-info text{
+	flex: 1;
+	font-size: 32rpx;
+  /* flex:0 0 200rpx; */
+}
+.order-item-info-status{
+	display:inline-block;
+	background-color: lightcoral;
+	border-radius: 10rpx;
+	margin-left: 415rpx;
+}
+.order-item-info-device-num{
+	/* position: absolute; */
+	margin-right: -300rpx; 
+}
+
+.order-item-check:not(:empty){
+	margin-top: 10rpx;
+}
+.order-item-check navigator{
+	display: flex;
+	padding: 6rpx 16rpx;
+	/* border: 1rpx solid #f7982a; */
+	/* color: #666; */
+	line-height: 1;
+	font-size: 28rpx;
+	border-radius: 10rpx;
+	right: 0;
+	margin-right: 10rpx;
+	white-space: nowrap;
+}
+.order-item-check-status{
+	border: 1rpx solid #f7982a;
+	color: #f7982a;
+}
+.order-item-check-info{
+	border: 1rpx solid gray;
+	color: #gray;
+}

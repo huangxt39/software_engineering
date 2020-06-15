@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "设备借用记录",
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true
+}

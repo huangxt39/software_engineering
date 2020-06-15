@@ -1,0 +1,35 @@
+@import 'weui.wxss';
+
+.titleCss{
+  width: 100%;
+  height: 15vh;
+  text-align: center;
+}
+.titleTextCss{
+  font-size: 40rpx;
+  line-height: 15vh;
+}
+.addBnCss{
+  margin-top:5vh;
+  align-items: center;
+  display: flex;
+}
+.iconCss{
+  width: 3.5vh;
+  height: 3.5vh;
+}
+.labelCss{
+  display: flex;
+}
+.textCss{
+  font-size: 30rpx;
+  margin-left: 1vh;
+  line-height: 3.5vh;
+}
+.inputCss{
+  margin-left: 2vh;
+  font-size: 30rpx;
+}
+.place-holder{
+  font-size: 30rpx;
+}

@@ -1,0 +1,84 @@
+.head-height {
+  height: 160rpx;
+}
+
+.head {
+  display:flex;
+  width: 100%;
+  background-color: #ffd8ac;
+  align-items: center;
+}
+
+.login-button {
+  opacity: 0; 
+  width: 100%;
+  position: fixed;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 30rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #333333;
+  font-size: 30rpx;
+}
+
+
+
+.list-wrapper {
+  width: 100%;
+}
+
+/* 横着的分割View样式 */
+/*分割线样式*/
+.div-line{
+  background: #E0E3DA;
+  width: 100%;
+  height: 3rpx;
+}
+
+.list-item {
+  width: 100%;
+  height: 90rpx;
+}
+
+.list-item_active {
+  background-color: #E0E3DA;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 90rpx;
+}
+.item-text {
+  position: fixed;
+  left: 100rpx;
+  font-size: 28rpx;
+}
+.item-array {
+  position: fixed;
+  right: 50rpx;
+  font-size: 28rpx;
+}
+
+.item-image {
+  position: fixed;
+  left: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+

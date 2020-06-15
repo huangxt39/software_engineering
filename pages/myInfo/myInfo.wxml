@@ -1,0 +1,76 @@
+<view>
+  <view class="titleCss">
+    <text class="titleTextCss">{{titleInfo}}</text>
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label labelCss">
+              <image src="../../icon/user_red.png" class="iconCss"></image>
+              <text class="textCss">姓名:</text>
+            </view>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.name}}"/>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label labelCss">
+            <image src="../../icon/user_red.png" class="iconCss"></image>
+            <text class="textCss">学号:</text>
+          </view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.id}}" type="number"/>
+      </view>
+  </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label labelCss">
+              <image src="../../icon/password.png" class="iconCss"></image>
+              <text class="textCss">密码:</text>
+            </view>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.password}}" password bindinput="passwordInput" focus="{{password_show}}"/>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-label labelCss">
+          <image src="../../icon/safety.png" class="iconCss"></image>
+          <text class="textCss">确认密码:</text>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.password}}" password bindinput="passwordCheckInput"/>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-label labelCss">
+          <image src="../../icon/realName.png" class="iconCss"></image>
+          <text class="textCss">电子邮箱:</text>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.email}}" type="email"/>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-label labelCss">
+          <image src="../../icon/phone.png" class="iconCss"></image>
+          <text class="textCss">手机号码:</text>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.cellphone}}" type="number"/>
+        </view>
+    </view>
+  </view>
+  <view class="page__bd page__bd_spacing addBnCss">
+      <button class="weui-btn" type="default" size="mini" bindtap="addUser">修改信息</button>
+  </view>
+  <view class="page__bd page__bd_spacing addBnCss">
+      <button class="weui-btn" type="warn" size="mini" bindtap="addUser">退出登录</button>
+  </view>
+  <view class="page__bd page__bd_spacing addBnCss">
+      <button class="weui-btn" type="warn" size="mini" bindtap="addUser">注销账号</button>
+  </view>
+</view>

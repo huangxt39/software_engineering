@@ -1,0 +1,49 @@
+<!--logs.wxml-->
+<view class="container">
+	<view class="container-body space-content">
+	
+	  <view class="space-block">
+	  	<view class="space-block-title">设备清单</view>
+			<view class="order-item-info" wx:for="{{item.devices}}" wx:for-item='device' wx:for-index="{{item.devices.name}}" wx:key="id">
+				<view class="order-item-img">
+					<image src="{{device_img[device.name]}}" mode="widthFix"></image>
+				</view>
+				<text class="order-item-info-device">{{device.name}} </text>
+							<!-- <text class="order-item-title-time">{{item.starttime}}</text> -->
+				<text class="order-item-info-device-num">x{{device.num}}</text>
+			</view>
+	  </view>
+
+	  <view class="space-block">
+	  	<view class="space-block-title">借用详情</view>
+	  	<view class="space-block-content">
+				<view class="space-item">
+					<text class="text-left">借用申请审核人：</text>
+					<text class="text-right">张三</text>
+				</view>
+				<view class="space-item">
+					<text class="text-left">设备领取审核人：</text>
+					<text class="text-right">张四</text>
+				</view>
+				<view class="space-item">
+					<text class="text-left">设备归还审核人：</text>
+					<text class="text-right">张五</text>
+				</view>
+				<view class="space-item">
+					<text class="text-left">归还确认审核人：</text>
+					<text class="text-right">张六</text>
+				</view>
+			</view>
+  	</view>
+  	<!-- <view class="space-block">
+	  	<view class="space-block-title">预订须知</view>
+	  	<view class="space-block-content">
+	  		<view class="space-passage">1.预定成功后凭借订单短信在预定时间入驻会议室;如遇手机短信删除,或无法上网的情况,您可以致电 客服电话为您重新发送订单信息</view>
+	  		<view class="space-passage">2.预定后如需退订,请在预定时间开始24小时前取消订单,详情可查看退订政策</view>
+	  	</view>
+  	</view> -->
+	</view>
+	<!-- <view class="container-footer">
+		<text class="apply-btn">我要预订</text>
+	</view> -->
+</view>
