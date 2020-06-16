@@ -1,0 +1,18 @@
+<!--pages/testPage/testPage.wxml-->
+<button bindtap='testFunction' data-database="用户账户数据" data-instruction="SELECT * FROM 用户表;"> 测试云函数 </button>
+<view>
+{{result}}
+</view>
+<button bindtap='testRequest'> 测试request </button>
+<view>
+  {{id}}
+</view>
+<button bindtap='testPostdata' data-id="17363028" data-wxid="vdxva991sdf81" data-type="老师"> 测试Postdata </button>
+<view>
+  {{return_msg}}
+</view>
+
+<button bindtap='chooseImage'> 测试Postdata </button>
+<view>
+  {{file_url}}
+</view>
