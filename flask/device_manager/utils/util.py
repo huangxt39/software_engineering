@@ -102,8 +102,34 @@ def data_format(bean):
             bean[key] = float(bean[key])
     return bean
 
+## 可用
 def existing_database(db):
     for i in db.get_tables_for_bind():
         print(i)
     all_table = {table_obj.name: table_obj for table_obj in db.get_tables_for_bind()}
     return all_table
+
+## 可用
+class DateEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime.datetime):
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
+        elif isinstance(obj, datetime.date):
+            return obj.strftime("%Y-%m-%d")
+        else:
+            return json.JSONEncoder.default(self, obj)
+
+
+def return_img_stream(img_local_path):
+    """
+    工具函数:
+    获取本地图片流
+    :param img_local_path:文件单张图片的本地绝对路径
+    :return: 图片流
+    """
+    import base64
+    img_stream = ''
+    with open(img_local_path, 'rb') as img_f:
+        img_stream = img_f.read()
+        img_stream = base64.b64encode(img_stream)
+    return img_stream

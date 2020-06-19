@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="sass/element.css">
+</head>
+<body>
+  <div id="app">
+    <el-button @click="visible = true">Button</el-button>
+    <el-dialog :visible.sync="visible" title="Hello world">
+      <p>Try Element</p>
+    </el-dialog>
+  </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/element.js"></script>
+<script>
+  new Vue({
+      el: '#app',
+      data: function() {
+        return { visible: false }
+      }
+    })
+</script>
+
+
+<!-- 图片上传 -->
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="LOGO" prop="logoImg">
+              <el-upload
+              class="upload-demo"
+              ref="upload"
+              name="logoImg"
+              :action="action"
+              :on-success="uploadSuccess"
+              multiple
+              :limit="1"
+              :show-file-list="false"
+              :on-exceed="handleExceed"
+              :on-progress="uploading"
+              :file-list="fileList"
+              :before-upload="beforeAvatarUpload">
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip" style="color:#F00">注：只能上传jpg/png文件，图片尺寸必须377mm x 60mm, 且不超过500KB</div>
+            </el-upload>
+            </el-form-item>
+ 
+            <el-form-item v-show="imgShow">
+              <!-- <span>liuweixiang</span> -->
+              <img :src="imgSrc" style="width: 300px">
+          </el-form-item>
+          </el-col>
+        </el-row>
+        
+</html>
+

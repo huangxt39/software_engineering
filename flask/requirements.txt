@@ -4,3 +4,4 @@ flask==1.0.2
 flask-sqlalchemy
 pymysql
 flask-mysqldb
+flask-cors
