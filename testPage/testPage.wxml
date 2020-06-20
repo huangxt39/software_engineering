@@ -12,7 +12,7 @@
   {{return_msg}}
 </view>
 
-<button bindtap='chooseImage'> 测试Postdata </button>
+<button bindtap='wxlogin'> 测试登录 </button>
 <view>
-  {{file_url}}
+  {{openid}}
 </view>
