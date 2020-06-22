@@ -1,0 +1,23 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+  <form catchsubmit="formSubmit" catchreset="formReset">
+    <view class="form-body">
+      <view class="page-title">创建一个账号</view>
+      <picker class="input-cell" bindchange="bindPickerChange" value="{{index}}" range="{{array}}" name="type">
+        <text class="place-holder">账户类型　　</text><text>{{array[index]}}</text>
+      </picker>
+      <input class="input-cell" placeholder-class="place-holder" name="name" placeholder="姓名" />
+      <input class="input-cell" placeholder-class="place-holder" name="stu_fac_id" placeholder="学/工号" type="number"/>
+      <input class="input-cell" placeholder-class="place-holder" name="email" placeholder="邮箱" />
+      <input class="input-cell" placeholder-class="place-holder" name="phone" placeholder="电话" type="number"/>
+      <text style="margin-top: -20rpx; color:#2699FB; font-size: 28rpx">创建账号后将绑定当前微信账号下次自动登录</text>
+      <checkbox-group bindchange="checkboxChange">
+        <checkbox style="transform: scale(0.7); margin-bottom: 20rpx" value="checked"><text style="color:#2699FB; text-decoration-line: underline; font-size: 35rpx; ">我已阅读并同意用户须知</text></checkbox>
+      </checkbox-group>
+    </view>
+    <button class="submit-button" style="width: 560rpx" form-type="submit">确认</button>
+  </form>
+  <mp-dialog show="{{showDialog}}" bindbuttontap="tapDialogButton" buttons="{{[{text:'确定'}]}}">
+    <view>{{message}}</view>
+  </mp-dialog>
+</view>

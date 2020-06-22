@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/devices/devices",
     "pages/record/record",
     "pages/orderdetail/orderdetail",
@@ -55,5 +56,8 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+  "useExtendedLib": {
+    "weui": true
+  }
 }

@@ -1,0 +1,52 @@
+/* pages/login/login.wxss */
+
+.container{
+  height: 100%;
+  width:  100%;
+  background-color: #F1F9FF;
+}
+
+.form-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFFFFF;
+  margin-top: 40rpx;
+  margin-left: 60rpx;
+  margin-right: 60rpx;
+}
+
+.page-title {
+  margin-top: 70rpx;
+  margin-bottom: 70rpx;
+  color: #2699FB;
+  font-size: 50rpx;
+  font-weight: bold;
+}
+
+.input-cell {
+  margin-bottom: 32rpx;
+  height: 96rpx;
+  width: 560rpx;
+  /* background-color: burlywood; */
+  border:3rpx solid #BCE0FD;
+}
+
+picker.input-cell {
+  display: flex;
+  align-items: center;
+}
+
+.place-holder {
+  margin-left: 40rpx;
+  font-size: 32rpx;
+  color: #BCE0FD;
+  font-family: Arial;
+}
+
+.submit-button {
+  margin-top: 40rpx;
+  color: #FFFFFF;
+  background-color: #2699FB;
+}
+
