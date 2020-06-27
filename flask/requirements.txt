@@ -2,6 +2,9 @@ gunicorn==19.9.0
 gevent==1.4.0
 flask==1.0.2
 flask-sqlalchemy
-pymysql
 flask-mysqldb
 flask-cors
+pymysql
+pycryptodome
+requests
+pillow

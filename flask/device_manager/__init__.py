@@ -8,15 +8,18 @@ root = "mysql"
 root = "108.166.209.115"
 
 bps = {
-        "borrow":'device_manager.views.wechat.borrow:borrow',
-        "device":'device_manager.views.wechat.record:record',
-        "login":'device_manager.views.wechat.login:login',
+        "wx_borrow":'device_manager.views.wechat.wx_borrow:wx_borrow',
+        "wx_device":'device_manager.views.wechat.wx_device:wx_device',
+        "wx_login":'device_manager.views.wechat.wx_login:wx_login',
+        "wx_record":'device_manager.views.wechat.wx_record:wx_record',
+        "wx_user":'device_manager.views.wechat.wx_user:wx_user',
         "test":'device_manager.views.test:test',
         "admin_login":'device_manager.views.website.admin_login:admin_login',
-        "admin_signup":'device_manager.views.website.admin_signup:admin_signup',
+        # "admin_signup":'device_manager.views.website.admin_signup:admin_signup',
         "admin_problem":'device_manager.views.website.admin_problem:admin_problem',
         "admin_user":'device_manager.views.website.admin_user:admin_user',
         "admin_device":'device_manager.views.website.admin_device:admin_device',
+        "admin_record":'device_manager.views.website.admin_record:admin_record',
 }
 
 def create_app():

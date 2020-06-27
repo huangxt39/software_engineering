@@ -8,7 +8,7 @@ gol.set_value("debug",0)
 db = SQLAlchemy(use_native_unicode='utf8')
 
 ## 生成models
-# flask-sqlacodegen "mysql+pymysql://root:123456@108.166.209.115:3306/借用记录" --outfile model.py --flask
+# flask-sqlacodegen "mysql+pymysql://root:123456@108.166.209.115:3306/设备管理" --outfile model.py --flask
 
 ## 用户账户数据库
 class User(db.Model):
@@ -74,7 +74,15 @@ class Device_information(db.Model):
     student_limit = db.Column(db.Integer, info='学生借用上限')
     teacher_limit_time = db.Column(db.Integer, info='学生最大借用时间')
     teacher_limit = db.Column(db.Integer, info='老师借用上限')
-    image = db.Column(db.String(20), info='设备图片路径')
+    image = db.Column(db.String(255, 'utf8_general_ci'), info='设备图片路径')
+    big_type_id = db.Column(db.Integer, info='设备大类型，例如turtlebot2属于turtlebot系列')
+
+
+class Device_big_type(db.Model):
+    __tablename__ = '设备大类型表'
+    __bind_key__ = 'manager'
+    big_type_id = db.Column(db.Integer, primary_key=True, info='类型id')
+    name = db.Column(db.String(10, 'utf8_general_ci'), info='设备名称')
 
 
 class Signal_device(db.Model):
@@ -115,8 +123,18 @@ class Record_devices(db.Model):  ## 每次借用借用了什么设备
     # __bind_key__ = 'record'
 
     id = db.Column(db.String(10, 'utf8_general_ci'), primary_key=True, nullable=False)
-    device_type = db.Column(db.Integer, primary_key=True, nullable=False)
+    device_type = db.Column(db.ForeignKey('设备信息表.type_id', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False, index=True)
     num = db.Column(db.Integer, info='这个类型的设备借用了多少')
+    state = db.Column(db.String(10), info='此设备借用的状态')
+
+
+class Record_Single_devices(db.Model):  ## 每次借用借用了什么设备
+    __tablename__ = '借用单个设备表'
+    __bind_key__ = 'manager'
+    # __bind_key__ = 'record'
+
+    id = db.Column(db.String(10, 'utf8_general_ci'), primary_key=True, nullable=False)
+    device_id = db.Column(db.ForeignKey('设备信息表.type_id', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False, index=True)
     state = db.Column(db.String(10), info='此设备借用的状态')
 
 class Borrow_record(db.Model):  
@@ -136,6 +154,7 @@ class Borrow_record(db.Model):
     user_id = db.Column(db.String(8, 'utf8_general_ci'), info='用户id')
     borrow_reason = db.Column(db.String(255, 'utf8_general_ci'), server_default=db.FetchedValue(), info='借用理由')
     state_id = db.Column(db.String(10, 'utf8_general_ci'), info='订单状态')
+    device_type = db.Column(db.Integer, info='类型id')
 
 
 class Record_state(db.Model):

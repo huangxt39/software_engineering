@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "474ed69e-131c-4333-acfb-eb19a430ba7a",
+		"name": "小程序端测试",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "127.0.0.1:5000/wx_login/signup?user_type=1&user_id=17363030&name=测试人",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_login/signup?user_type=1&user_id=17363030&name=测试人",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_login",
+						"signup"
+					],
+					"query": [
+						{
+							"key": "user_type",
+							"value": "1"
+						},
+						{
+							"key": "user_id",
+							"value": "17363030"
+						},
+						{
+							"key": "name",
+							"value": "测试人"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:5000/wx_device/get_device?type_id=0",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_device/get_device",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_device",
+						"get_device"
+					],
+					"query": [
+						{
+							"key": "type_id",
+							"value": "0",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:5000/wx_device/device_type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_device/device_type",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_device",
+						"device_type"
+					],
+					"query": [
+						{
+							"key": "type_id",
+							"value": "0",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:5000/wx_device/type_name?big_type_id=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_device/type_name?big_type_id=2",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_device",
+						"type_name"
+					],
+					"query": [
+						{
+							"key": "big_type_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:5000/wx_device/get_img?path=./device_manager/static/img/device/F550.jpg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_device/get_img?path=./device_manager/static/img/device/F550.jpg",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_device",
+						"get_img"
+					],
+					"query": [
+						{
+							"key": "path",
+							"value": "./device_manager/static/img/device/F550.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:5000/admin_record/figure?type_id=1 Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_record/figure?user_id=1&num=3",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_record",
+						"figure"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						},
+						{
+							"key": "num",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
