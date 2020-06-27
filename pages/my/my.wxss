@@ -1,84 +1,82 @@
-.head-height {
-  height: 160rpx;
+.title {
+  margin: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .head {
-  display:flex;
-  width: 100%;
-  background-color: #ffd8ac;
-  align-items: center;
-}
-
-.login-button {
-  opacity: 0; 
-  width: 100%;
-  position: fixed;
-}
-
-.userinfo {
+  width: 500rpx;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  width: 100%;
-  position: fixed;
 }
 
-.userinfo-avatar {
-  width: 100rpx;
-  height: 100rpx;
-  margin: 30rpx;
+.name-num {
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
   border-radius: 50%;
 }
 
-.userinfo-nickname {
-  color: #333333;
-  font-size: 30rpx;
+.edit-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 20rpx;
 }
 
-
-
-.list-wrapper {
-  width: 100%;
-}
-
-/* 横着的分割View样式 */
-/*分割线样式*/
-.div-line{
-  background: #E0E3DA;
-  width: 100%;
-  height: 3rpx;
-}
-
-.list-item {
-  width: 100%;
-  height: 90rpx;
-}
-
-.list-item_active {
-  background-color: #E0E3DA;
-}
-
-.item {
+.middle-block {
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  height: 90rpx;
-}
-.item-text {
-  position: fixed;
-  left: 100rpx;
-  font-size: 28rpx;
-}
-.item-array {
-  position: fixed;
-  right: 50rpx;
-  font-size: 28rpx;
+  width: 600rpx;
+  align-self: center;
 }
 
-.item-image {
-  position: fixed;
-  left: 50rpx;
-  width: 40rpx;
+.middle-item {
+  width: 400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.middle-value {
+  color: #2699FB;
+  font-size: 40rpx;
+}
+
+.middle-label {
+  color: #2699FB;
+  font-size: 25rpx;
+}
+
+.divider {
+  width: 0rpx;
   height: 40rpx;
+  border-right: 4rpx solid #2699FB;
 }
 
+.pane {
+  margin-top: 50rpx;
+  width: 600rpx;
+  height: 700rpx;
+  background-color: #F1F9FF;
+  align-self: center;
+}
+
+.func-item {
+  margin-top: 40rpx;
+  margin-left: 100rpx;
+  margin-right: 100rpx;
+}
+
+.func-label {
+  color:  #2699FB;
+  margin-left: 60rpx;
+}

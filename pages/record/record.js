@@ -121,7 +121,7 @@ Page({
   gotoDamage:function(){
     var id=null;
     wx.navigateTo({
-      url: '',
+      url: '../damage/damage',
     })
   },
   gotoDetail:function(e){

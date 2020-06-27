@@ -1,11 +1,11 @@
-// pages/index1/index1.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    type_info:''
   },
 
   /**
@@ -39,8 +39,11 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
+  onUnload: function (options) {
+    let data= JSON.parse(options.item)
+    this.setData({
+      type_info: data,
+    })
   },
 
   /**

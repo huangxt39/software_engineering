@@ -29,6 +29,9 @@ Page({
     }
     else {
       console.log('form发生了submit事件，携带数据为：', form_data)
+      wx.navigateTo({
+        url: "../login.success/login.success",
+      })
     }
     
   },

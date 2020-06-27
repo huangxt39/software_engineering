@@ -14,7 +14,7 @@
     <view wx:if="{{cateItems[curIndex].ishaveChild}}">
       <block wx:for="{{cateItems[curIndex].children}}" wx:key="id">
         <view class="nav_right_items" bindtap="gotoDetail" hover-class="navigator-hover" data-item="{{item}}">
-            <image src="{{item.image[0]}}"></image>
+            <image src="{{item.image}}"></image>
             <text>{{item.name}}</text>
         </view>
       </block>

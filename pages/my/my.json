@@ -1,6 +1,8 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  },
+  "navigationBarTitleText": "我的信息",
   "backgroundColor": "#ffffff",
-  "backgroundTextStyle": "dark",
   "enablePullDownRefresh": true
 }

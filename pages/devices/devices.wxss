@@ -38,7 +38,7 @@ page{
 .nav_left .nav_left_items.active{ 
   /*背景色变成白色*/ 
   background: #fff; 
-  color: #f7982a;
+  color: #1A86DD;
 } 
 /*右侧栏主盒子*/ 
 .nav_right{ 

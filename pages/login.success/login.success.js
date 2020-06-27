@@ -1,4 +1,4 @@
-// pages/chooseLib/chooseLib.js
+// pages/login.success/login.success.js
 Page({
 
   /**
@@ -8,6 +8,9 @@ Page({
 
   },
 
+  start_use() {
+    wx.switchTab({url:"../devices/devices"})
+  },
   /**
    * 生命周期函数--监听页面加载
    */

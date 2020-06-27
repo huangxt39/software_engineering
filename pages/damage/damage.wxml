@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view class="container"style="display:block;">
+
+  <view class="equip"style="display:flex;">
+    <block wx:>
+      <image class="equip-avatar" src='/pages/image/equip.png' ></image>
+    </block>
+    <view class="equipname">
+      <text class="equip-name">turtlebot</text>
+    </view>
+  </view>
+  <view class="baseinfo"style="display:block;">
+    <view class='form-list'style="display:flex;">
+     <text>设备id：</text>
+     <input type='text' value='{{scanCodeMsg}}'></input>
+     <image class='scan' bindtap='scanCode' src='/pages/image/scanCode.png' mode='widthFix'></image>
+    </view>
+   <view class="headline">故障描述：</view>
+    <view class="order">
+     <input type='text' ></input>
+    </view>
+   </view>
+  
+</view>
+
+<view class="handin">
+    <button class="btn_handin" bindtap="return">提交</button>
+</view>

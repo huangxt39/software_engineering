@@ -1,2 +1,0 @@
-<!--pages/index1/index1.wxml-->
-<view> <checkbox checked="{{true}}"></checkbox></view>

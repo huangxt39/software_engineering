@@ -30,7 +30,7 @@
 					</view>
 					<view class="order-item-check" style="display: flex;flex-direction: row-reverse;">
 						<navigator class="order-item-check-status" bindtap="gotoCheck" wx:if="{{status_button[item.status] != ''}}"> {{status_button[item.status]}}</navigator>
-						<navigator class="order-item-check-info" bindtap="gotoDemage"> 损坏上报</navigator>
+						<navigator class="order-item-check-info" bindtap="gotoDamage"> 损坏上报</navigator>
 						<navigator class="order-item-check-info" bindtap="gotoDetail" data-item="{{item}}"> 查看详情</navigator>
 					</view>
 				</view>

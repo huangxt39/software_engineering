@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<view class="container"style="display:block;">
+
+  <view class="equip"style="display:flex;">
+    <block wx:>
+      <image class="equip-avatar" src='../../images/turtlebot2.0.png' ></image>
+    </block>
+    <view class="equipname">
+      <text class="equip-name">turtlebot</text>
+    </view>
+  </view>
+  <view class="baseinfo"style="display:block;">
+    <view class="equip-number"style="display:flex;">   
+     <text class="content">借用数量:</text>  
+     <input type="number" auto-focus focus='{{focus}}' value="{{value}}" title="" bindinput="handleInput"  bindblur="validate" maxlength="11" ></input>  
+    </view>
+  
+
+
+    
+    <view class="equipinfo"style="display:block;">
+     
+     <text class="content">预计借用日期：</text>  
+    </view>
+    <view class="order"style="display:block;">
+     <view class="headline">订单号码：</view>
+     <text class="content">Y3Y3I42I3</text>  
+    </view>
+    <view class="state"style="display:block;">
+     <view class="headline">状态：</view>
+     <text class="content">未逾期</text>  
+    </view>
+  </view>
+
+  
+</view>
+<view class="handin">
+    <button class="btn_handin" bindtap="return">提交</button>
+</view>

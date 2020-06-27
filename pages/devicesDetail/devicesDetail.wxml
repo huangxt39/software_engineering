@@ -1,34 +1,45 @@
 <view class="container">
   <view class="page-body">
     <view class="page-section page-section-spacing swiper">
-      <swiper indicator-dots="{{indicatorDots}}"
-    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{swiper_height}}" >
-        <block wx:for="{{device.image}}" wx:key="*this">
+      <swiper indicator-dots="{{false}}" autoplay="{{false}}" interval="{{2000}}" duration="{{500}}" style="height:{{swiper_height}}">
+        <block wx:for="{{type_info.imgs}}">
           <swiper-item>
-            <image src="{{item}}" class="slide-image" mode="widthFix" bindload="get_height"></image>
+            <image src="{{'../../images/'+item}}" class="slide-image" mode="widthFix" bindload="get_height"></image>
           </swiper-item>
         </block>
       </swiper>
       <view class="text-tips"><text>左右滑动可查看更多图片</text></view>
     </view>
-    <view class="space-block">
-      <view class="space-block-title">{{device.name}}</view>
-      <view class="space-item">
-        <text class="text-left">可借数量：{{device.left_amount}}</text>
-        <text class="text-right">总共数量：{{device.total_amount}}</text>
+    <view class="title-block">
+      <view class="title-info">
+        <view class="title">{{type_info.type_name}}</view>
+        <view class="cost"><text style="color:#FF6D4A">{{type_info.cost}}</text> 金币/台.天</view>
       </view>
-      <text class="text-description">{{device.description}}</text>
+      <button type="primary" bindtap="borrow" style="font-weight: normal; margin-left: 50rpx; font-size: 30rpx; width: 180rpx; background-color: #2699FB">借用</button>
     </view>
-    <view class="space-block">
-      <view class="space-block-title">设备组件</view>
-	  	<view class="space-block-content">
-      <block wx:for="{{device.components}}" wx:key="id">
-        <view class="space-item">
-					<text class="text-left">{{item.name}}</text>
-					<text class="text-right">x{{item.quantity}}</text>
-				</view>
+    <view class="title-desc">{{type_info.description}}</view>
+    <view style="margin-top: 20rpx; margin-left: 40rpx">每日剩余设备数:</view>
+    <view class="date-num">
+      <block wx:for="{{type_info.available_num}}">
+        <view class="ava-item">
+          <text style="font-size: 35rpx; color: #2699FB;">{{item.num}}</text>
+          <text>{{item.date}}</text>
+        </view>
       </block>
-			</view>
     </view>
+    <view style="margin-top: 20rpx; margin-left: 40rpx">设备组件:</view>
+    <view class="tags-block">
+      <block wx:for="{{type_info.components}}">
+        <view class="tag-item">
+          <text style="font-size: 30rpx; color: #2699FB;">{{item.name}} x {{item.num}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="subscribe-block">
+      <text style="font-size: 30rpx; color: #2699FB">关注该设备:</text>
+      <text style="font-size: 23rpx">设备因提前归还等原因突然增加时请通知我</text>
+      <switch style="transform: scale(0.7)" checked="{{subscribe}}" bindlongtap="subscribe_device"></switch>
+    </view>
+    <view style="height: 200rpx"></view>
   </view>
 </view>
