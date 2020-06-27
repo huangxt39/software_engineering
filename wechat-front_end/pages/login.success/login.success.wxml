@@ -1,0 +1,9 @@
+<!--pages/login.success/login.success.wxml-->
+<view>
+  <mp-msg type="success" title="注册成功">
+    <view slot="desc">下次可通过微信自动登录</view>
+    <view slot="handle">
+      <button style="background-color: #2699FB;" bindtap="start_use" type="primary">开始使用</button>
+    </view>
+  </mp-msg>
+</view>

@@ -1,0 +1,82 @@
+.title {
+  margin: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head {
+  width: 500rpx;
+  display: flex;
+  align-items: center;
+}
+
+.name-num {
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.edit-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 20rpx;
+}
+
+.middle-block {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 600rpx;
+  align-self: center;
+}
+
+.middle-item {
+  width: 400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.middle-value {
+  color: #2699FB;
+  font-size: 40rpx;
+}
+
+.middle-label {
+  color: #2699FB;
+  font-size: 25rpx;
+}
+
+.divider {
+  width: 0rpx;
+  height: 40rpx;
+  border-right: 4rpx solid #2699FB;
+}
+
+.pane {
+  margin-top: 50rpx;
+  width: 600rpx;
+  height: 700rpx;
+  background-color: #F1F9FF;
+  align-self: center;
+}
+
+.func-item {
+  margin-top: 40rpx;
+  margin-left: 100rpx;
+  margin-right: 100rpx;
+}
+
+.func-label {
+  color:  #2699FB;
+  margin-left: 60rpx;
+}

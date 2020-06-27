@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/devices/devices",
+    "pages/borrow/borrow",
+    "pages/return/return",
+    "pages/damage/damage",
+    "pages/devicesDetail/devicesDetail",
+    "pages/login.success/login.success",
+    "pages/login/login",
+    "pages/order/order",
+    "pages/record/record",
+    "pages/orderdetail/orderdetail",
+    "pages/my/my",
+    "pages/myInfo/myInfo"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#fff",
+    "borderStyle": "black",
+    "backgroundColor": "#333",
+    "list": [
+      {
+        "pagePath": "pages/devices/devices",
+        "text": "设备",
+        "iconPath": "./images/tabbar-icon-popular-normal.png",
+        "selectedIconPath": "./images/tabbar-icon-popular-active.png"
+      },
+      {
+        "pagePath": "pages/record/record",
+        "text": "记录",
+        "iconPath": "./images/tabbar-icon-teams-normal.png",
+        "selectedIconPath": "./images/tabbar-icon-teams-active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "./images/tabbar-icon-designers-normal.png",
+        "selectedIconPath": "./images/tabbar-icon-designers-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "useExtendedLib": {
+    "weui": true
+  }
+}

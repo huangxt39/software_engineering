@@ -1,0 +1,41 @@
+<view class="container">
+	<view class="filter-flex">
+		<view class="filter-tab">
+			<!-- <text bindtap="setSortBy" data-sortindex="{{index}}" data-sortid="{{item.id}}" class="{{sortindex==index?'active':''}}" wx:for="{{sort}}" wx:key="{{item.id}}">{{item.title}}</text> -->
+			<!-- 
+				bindtap 是触发事件
+				data-** **是传入的数据
+			 -->
+			<text bindtap="setFilter" data-typeindex="{{index}}" data-filter="{{item.typeindex}}" class="{{typeindex==index?'active':''}}" wx:for="{{filter}}" wx:key="id">{{item.title}}</text>
+		</view>
+	</view>
+	<scroll-view class="container-body" scroll-y="true" scroll-top="{{scrolltop}}" bindscroll="scrollHandle" lower-threshold="50" bindscrolltolower="scrollLoading">
+		<view class="order-list">
+			<view class="order-item" wx:for="{{orderlist}}" wx:key="id" >
+				<view class="order-item-text">
+					<view class="order-item-title">
+						<view class="order-item-title-orderid">{{item.orderid}}
+							<image class="order-item-title-orderid-arrow" mode="widthFix" src="../../images/icon-arrow-right.png"></image>
+						</view>
+						<view class="order-item-info-status" >{{item.status}}</view>
+					</view>
+
+					<view class="order-item-info" wx:for="{{item.devices}}" wx:for-item='device' wx:for-index="{{item.devices.name}}" wx:key="*this">
+						<view class="order-item-img">
+								<image src="{{device_img[device.name]}}" mode="widthFix"></image>
+						</view>
+						<text class="order-item-info-device">{{device.name}} </text>
+						<!-- <text class="order-item-title-time">{{item.starttime}}</text> -->
+						<text class="order-item-info-device-num">x{{device.num}}</text>
+					</view>
+					<view class="order-item-check" style="display: flex;flex-direction: row-reverse;">
+						<navigator class="order-item-check-status" bindtap="gotoCheck" wx:if="{{status_button[item.status] != ''}}"> {{status_button[item.status]}}</navigator>
+						<navigator class="order-item-check-info" bindtap="gotoDamage"> 损坏上报</navigator>
+						<navigator class="order-item-check-info" bindtap="gotoDetail" data-item="{{item}}"> 查看详情</navigator>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goTop"></view>
+	</scroll-view>
+</view>

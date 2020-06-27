@@ -1,0 +1,35 @@
+<!--index.wxml-->
+<view class="container"style="display:block;">
+
+  <view class="equip"style="display:flex;">
+    <block wx:>
+      <image class="equip-avatar" src='/pages/image/equip.png' ></image>
+    </block>
+    <view class="equipname">
+      <text class="equip-name">turtlebot</text>
+    </view>
+  </view>
+  <view class="baseinfo"style="display:block;">
+    <view class="deadline"style="display:block;">
+     <view class="headline">设备名称：</view>
+     <text class="content">2020 5.16-2020 5.17</text>  
+    </view>
+    <view class="equipinfo"style="display:block;">
+     <view class="headline">预计借用日期：</view>
+     <text class="content">turtlebot</text>  
+    </view>
+    <view class="order"style="display:block;">
+     <view class="headline">订单号码：</view>
+     <text class="content">Y3Y3I42I3</text>  
+    </view>
+    <view class="state"style="display:block;">
+     <view class="headline">状态：</view>
+     <text class="content">未逾期</text>  
+    </view>
+  </view>
+
+  
+</view>
+<view class="handin">
+    <button class="btn_handin" bindtap="return">提交</button>
+</view>

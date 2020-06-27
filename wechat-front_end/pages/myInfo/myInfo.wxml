@@ -1,0 +1,51 @@
+<view style="width: 80%; align-self: center">
+  <view class="titleCss">
+    <text class="titleTextCss">我的信息</text>
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label labelCss">
+              <text class="textCss">姓名:</text>
+            </view>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.name}}"/>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label labelCss">
+            <text class="textCss">学号:</text>
+          </view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.stu_fac_id}}" type="number"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-label labelCss">
+          <text class="textCss">电子邮箱:</text>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.email}}" type="email"/>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-label labelCss">
+          <text class="textCss">手机号码:</text>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.phone}}" type="number"/>
+        </view>
+    </view>
+  </view>
+  <view style="display:flex; flex-direction:column; align-items: baseline">
+      <text style="margin-left: 50rpx; margin-top: 20rpx">个人简介:</text>
+      <textarea placeholder-class="place-holder" value="{{info.description}}" style="margin-left:30rpx; height: 400rpx"/>
+  </view>
+  <view style="width: 500rpx; margin: 40rpx; display: flex; justify-content: space-around">
+      <button style="font-size: 35rpx" type="default" size="mini" bindtap="addUser">修改信息</button>
+      <button style="font-size: 35rpx"  type="warn" size="mini" bindtap="addUser">注销账号</button>
+  </view>
+</view>

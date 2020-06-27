@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="title">
+    <view class="head">
+      <image class="avatar" src="{{userInfo.avatar}}"  mode="cover"></image>
+      <view class="name-num">
+        <text style="font-size: 40rpx; color: #2699FB">{{user_info.name}}</text>
+        <text style="color: #2699FB">{{user_info.stu_fac_id}}</text>
+      </view>
+    </view>
+    <image class="edit-icon" src="{{edit_icon}}" bindtap="goDetail"></image>
+  </view>
+  <view class="middle-block">
+    <view class="middle-item">
+      <text class="middle-value">{{user_info.bor_now}}</text>
+      <text class="middle-label">当前借用数量</text>
+    </view>
+    <view class="divider"></view>
+    <view class="middle-item">
+      <text class="middle-value">{{user_info.money}}</text>
+      <text class="middle-label">账户余额</text>
+    </view>
+    <view class="divider"></view>
+    <view class="middle-item">
+      <text class="middle-value">{{user_info.type}}</text>
+      <text class="middle-label">账户类型</text>
+    </view>
+  </view>
+  <view class="pane">
+    <view class="func-item" style="margin-top: 80rpx">
+      <mp-icon icon="contacts" color=" #2699FB" size="{{20}}"></mp-icon>
+      <text class="func-label">联系管理员</text>
+    </view>
+  </view>
+</view>
+
