@@ -29,8 +29,8 @@ def figure():
     record_list = db.session.query(Borrow_record.book_borrow_time, Borrow_record.actual_return_time).\
         filter(Borrow_record.actual_return_time > datetime.now() - timedelta(days = time))
     time_lists = query2dict(record_list.all())
-    add = [ sum([1 for j in range(len(time_lists)) if (time_lists[j]["book_borrow_time"]> datetime.now() - timedelta(days=i))]) for i in range(time)]
-    minus = [ sum([1 for j in range(len(time_lists)) if (time_lists[j]["actual_return_time"]> datetime.now() - timedelta(days=i))]) for i in range(time)]
+    add = [ sum([ time_lists[j]["num"] for j in range(len(time_lists)) if (time_lists[j]["book_borrow_time"]> datetime.now() - timedelta(days=i)) ]) for i in range(time)]
+    minus = [ sum([ time_lists[j]["num"] for j in range(len(time_lists)) if (time_lists[j]["actual_return_time"]> datetime.now() - timedelta(days=i)) ]) for i in range(time)]
     add = np.array(add)
     minus = np.array(minus)
 

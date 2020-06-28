@@ -3,10 +3,14 @@ from werkzeug.utils import import_string
 from device_manager.models import db
 import device_manager.utils.global_var as gol
 from flask_cors import *
+import platform
 
-root = "mysql"
-root = "108.166.209.115"
-
+if platform.system() == "Windows":
+    root = "108.166.209.115"
+    print("Windows running")
+else:
+    root = "mysql"
+    print("Linux running")
 bps = {
         "wx_borrow":'device_manager.views.wechat.wx_borrow:wx_borrow',
         "wx_device":'device_manager.views.wechat.wx_device:wx_device',
@@ -20,6 +24,7 @@ bps = {
         "admin_user":'device_manager.views.website.admin_user:admin_user',
         "admin_device":'device_manager.views.website.admin_device:admin_device',
         "admin_record":'device_manager.views.website.admin_record:admin_record',
+        "admin_setting":'device_manager.views.website.admin_setting:admin_setting',
 }
 
 def create_app():

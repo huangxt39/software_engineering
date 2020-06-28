@@ -7,4 +7,6 @@ flask-cors
 pymysql
 pycryptodome
 requests
+numpy
 pillow
+simplejson

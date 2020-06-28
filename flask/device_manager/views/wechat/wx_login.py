@@ -11,58 +11,26 @@ wx_login=Blueprint('wx_login',__name__)
 def show():
     return 'login.hello'
 
-# ## 收到创建信息，创建然后返回
-# @wx_login.route('/login',methods=["POST"])
-# def login():
-#     type_list = {"老师":1,"学生":2}
-#     id = request.values.get("id")
-#     wxid = request.values.get("wxid")
-#     type = request.values.get("type")
-#     new_user = User(wxid=wxid, user_type=type_list[type], user_id=id)
-#     # res = db.session.query(Pre_Manager).filter_by(account=username, password = password).first()
-#     db.session.add(new_user)
-#     db.session.commit()
-
-#     return "success"
-
 @wx_login.route('/login',methods=["GET","POST"])
 def login():
     return_dict = {}
-    # print('请求头:%s' % request.headers)
 
-    data = json.loads(request.get_data().decode("utf-8")) # 将前端Json数据转为字典
-    # appID = "appID" # 开发者关于微信小程序的appID
-    # appID = "wx5f653ad720e96dac" # 开发者关于微信小程序的appID
-    # appSecret = "42190f18e8d326651f41c0041944e479" # 开发者关于微信小程序的appSecret
-    # code = data["platCode"] # 前端POST过来的微信临时登录凭证code
-    # encryptedData = data["platUserInfoMap"]["encryptedData"]
-    # iv = data["platUserInfoMap"]["iv"]
-    # req_params = {
-    #     "appid": appID,
-    #     "secret": appSecret,
-    #     "js_code": code,
-    #     "grant_type": "authorization_code"
-    # }
-    # wx_login_api = "https://api.weixin.qq.com/sns/jscode2session"
-    # response_data = requests.get(wx_login_api, params=req_params) # 向API发起GET请求
-    # resData = response_data.json()
-    # print(resData)
-    # openid = resData ["openid"] # 得到用户关于当前小程序的OpenID
-    # session_key = resData ["session_key"] # 得到用户关于当前小程序的会话密钥session_key
-    openid, session_key, userinfo = get_userinfo(data["platCode"], data["platUserInfoMap"])
-    # pc = WXBizDataCrypt(appID, session_key) #对用户信息进行解密
-    # userinfo = pc.decrypt(encryptedData, iv) #获得用户信息
-    # print(userinfo)
+    platCode = request.values.get("platCode")
+    platUserInfoMap = request.values.get("platUserInfoMap")
+    try:
+        openid, session_key, userinfo = get_userinfo(platCode, platUserInfoMap)
+    except:
+        return jsonify({"code":-1,"info":"解码错误"})
     res =  db.session.query(User.wxid, User_type.user_type_name,\
         User.user_id, User.user_name, User.phone, User.email, User.photo).\
             filter(User.wxid == openid).\
             filter(User.user_type == User_type.user_type_id).all()
-    if len(res) != 1:
+    if len(res) == 1:
+        return_dict["result"] = query2dict(res)
+        # return_dict["userinfo"] = userinfo
+        return_dict["code"]=1
+    else:
         return_dict["code"]=0
-    return_dict["result"] = query2dict(res[0])
-    return_dict["userinfo"] = userinfo
-    return_dict["code"]=1
-
     return jsonify(return_dict)
 
 @wx_login.route('/signup',methods=["POST"])
@@ -73,43 +41,50 @@ def signup():
     user_type = request.values.get("user_type")
     name = request.values.get("name")
     user_id = request.values.get("user_id")
-    email = request.values.get("phont")
+    email = request.values.get("email")
     photo = request.values.get("photo")
+    phone = request.values.get("phone")
 
     platCode = request.values.get("platCode")
     platUserInfoMap = request.values.get("platUserInfoMap")
 
-    try:
-        openid, session_key, userinfo = get_userinfo(platCode, platUserInfoMap)
-    except:
-        openid = "testopenid"
+    # try:
+    openid, session_key, userinfo = get_userinfo(platCode, platUserInfoMap)
+    if openid == '出现错误':
+        return jsonify({'info':userinfo, "code": -1 })
+    # except:
+    #     return jsonify({"code":-1,"info":"解码错误"})
+    #     openid = "testopenid"
     ## 有没有这个人
-    res = db.session.query(School_information).filter_by(name=name, id=user_id).first()
-    if res is not None:
-        return json.dumps({"code":2})
+    res = db.session.query(School_information).filter_by(name=name, id=user_id).all()
+    if len(res)!=1:
+        return jsonify({"code":2, "info":"这个人不存在,学校竟然有多个人"})
 
     ## 账号有没有被注册
-    res = db.session.query(User).filter_by(user_id = user_id).first()
-    if res is not None: # 查询为空，代表账号未被注册
-        return json.dumps({"code":3})
+    res = db.session.query(User).filter_by(user_id = user_id).all()
+    if len(res) > 0: # user_id重复，代表账号已注册
+        return jsonify({"code":3, "info":"user_id重复，代表账号已注册"})
         
+    res = db.session.query(User).filter_by(wxid = openid).all()
+    if len(res) > 0: # openid重复，代表账号已注册
+        return jsonify({"code":4, "info":"openid重复，代表账号已注册"})
 
-    res = db.session.query(User).filter_by(wxid = openid).first()
-    if res is not None: # 查询为空，代表账号未被注册
-        return json.dumps({"code":3})
+    type_info = db.session.query(User_type).filter(User_type.user_type_name == user_type).first()
 
     new_user = User()
 
-    new_user.user_type = user_type 
-    new_user.name = name 
+    new_user.user_type = type_info.user_type_id
+    new_user.user_name = name 
     new_user.user_id =user_id
     new_user.email = email
     new_user.photo = photo 
+    new_user.phone = phone 
     new_user.wxid = openid 
+    new_user.money = type_info.wages
     db.session.add(new_user)
     db.session.commit()
 
-    return json.dumps({"code":1, "openid":openid})
+    return jsonify({"code":1, "openid":openid})
 
 ## 收到文件，文件为图片，数据库保存图片的链接。图片统一保存在cards下。
 @wx_login.route('/upload',methods=["POST"])
@@ -125,11 +100,30 @@ def img_recieve():
 
     return "temp.png"
 
+@wx_login.route('/delete_account',methods=["GET","POST"])
+def delete_account():
+    return_dict = {}
+    user_id = request.values.get("user_id")
+    res = db.session.query(User).filter(User.user_id == user_id).all()
+    print(res)
+    if len(res) == 1:
+        db.session.delete(res[0])
+        db.session.commit()
+        return_dict["code"] = 1
+    else:
+        return_dict["code"] = 0
+    return jsonify(return_dict)
+
 
 
 def get_userinfo(platCode, platUserInfoMap):
-    appID = "wx5f653ad720e96dac" # 开发者关于微信小程序的appID
-    appSecret = "42190f18e8d326651f41c0041944e479" # 开发者关于微信小程序的appSecret
+    ## hrh 测试用
+    # appID = "wx5f653ad720e96dac" # 开发者关于微信小程序的appID
+    # appSecret = "42190f18e8d326651f41c0041944e479" # 开发者关于微信小程序的appSecret
+    
+    ## hxt 实际用
+    appID = "wx80549443a9478a48" # 开发者关于微信小程序的appID
+    appSecret = "a0f3a4b2f7b0e5efbdf039bea64f88c2" # 开发者关于微信小程序的appSecret
     req_params = {
         "appid": appID,
         "secret": appSecret,
@@ -140,10 +134,16 @@ def get_userinfo(platCode, platUserInfoMap):
     response_data = requests.get(wx_login_api, params=req_params) # 向API发起GET请求
     resData = response_data.json()
     # print(resData)
-    openid = resData["openid"] # 得到用户关于当前小程序的OpenID
-    session_key = resData ["session_key"] # 得到用户关于当前小程序的会话密钥session_key
-    encryptedData = platUserInfoMap["encryptedData"]
-    iv = platUserInfoMap["iv"]
-    pc = WXBizDataCrypt(appID, session_key) #对用户信息进行解密
-    userinfo = pc.decrypt(encryptedData, iv) #获得用户信息
+    try:
+        openid = resData["openid"] # 得到用户关于当前小程序的OpenID
+        session_key = resData ["session_key"] # 得到用户关于当前小程序的会话密钥session_key
+        # encryptedData = platUserInfoMap["encryptedData"]
+        # iv = platUserInfoMap["iv"]
+        # pc = WXBizDataCrypt(appID, session_key) #对用户信息进行解密
+        # userinfo = pc.decrypt(encryptedData, iv) #获得用户信息
+        userinfo = None
+    except:
+        openid = '出现错误'
+        session_key = '出现错误'
+        userinfo = resData
     return openid, session_key, userinfo

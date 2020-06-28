@@ -4,7 +4,6 @@ import os
 from flask import Flask, Response, request, render_template, jsonify
 from flask import Blueprint
 import device_manager.utils.global_var as gol
-from PIL import Image
 import uuid
 admin_device=Blueprint('admin_device',__name__)
 
@@ -12,9 +11,6 @@ admin_device=Blueprint('admin_device',__name__)
 def upload_img():
     return_dict = {}
     #获取图片文件 name = upload
-    # if gol.get_value("debug"):
-    #     img = Image.open("./device_manager/static/img/device/F550.jpg")
-    # else:
     img = request.files.get('upload')
     if img is not None:
         new_device = Device_information()
@@ -73,6 +69,25 @@ def add():
     image = request.values.get("image")
     big_type_id = request.values.get("big_type_id")
     position = request.values.get("position")
+    cost = request.values.get("cost")
+    index1 = request.values.get("index1")
+    index2 = request.values.get("index2")
+
+    if cost:
+        cost = int(cost)
+    else:
+        cost = 50
+    if index1:
+        index1 = float(index1)
+    else:
+        index1 = 0.25
+    if index2:
+        index2 = float(index2)
+    else:
+        index2 = 50
+    total_num = int(total_num)
+    available_num = int(available_num)
+    real_cost = cost + (total_num - available_num)/total_num * index1 * index2
 
 
     if request.method == "POST":
@@ -89,26 +104,14 @@ def add():
         new_device.student_limit=int(student_limit)
         new_device.teacher_limit=int(teacher_limit)
         new_device.teacher_limit_time=int(teacher_limit_time)
-        new_device.big_type_id=int(big_type_id)
+        new_device.cost=cost
+        new_device.index1=index1
+        new_device.index2=index2
+        new_device.real_cost=real_cost
         if image is not None:
             new_device.image=image 
         if type_id is None:
             db.session.add(new_device)
-        new_single_devices = []
-
-        exist_devices_num = db.session.query(Signal_device).filter(Signal_device.type_id==type_id).count()
-        
-        for i in range(new_device.total_num - exist_devices_num):
-            new_single_device = Signal_device()
-            uid = str(uuid.uuid1())
-            uid = uid[4:8] + uid[19:21]
-            new_single_device.device_id = uid + "%03d"%new_device.big_type_id + "%05d"%new_device.type_id 
-            new_single_device.type_id = new_device.type_id
-            new_single_device.state_id = 0  #空闲
-            new_single_device.position = position
-            new_single_devices.append(new_single_device)
-        db.session.add_all(new_single_devices)
-        # db.add(new_device)
         db.session.commit()
         return_dict["code"] = 1
         return_dict["type_id"] = new_device.type_id
@@ -123,25 +126,12 @@ def add():
 @admin_device.route('/query', methods=['GET','POST'])
 def query():
     return_dict = {}
-
-    # if gol.get_value("debug"):
-    #     print("bebug mode auto input user_query")
-    #     # order = 1
-    #     name = "00003"
-    #     type_id = 1
-    #     query_type = 1
-    # else:
+    
     name = request.values.get("name")
     type_id = request.values.get("type_id")
     query_type = int(request.values.get("query_type"))
     page = int(request.values.get("page"))
     per_page = int(request.values.get("per_page"))
-    # print(name)
-    # print(type_id)
-    # print(query_type)
-    # print(type(query_type))
-    # data = request.get_json()
-    # print(data)
     if request.method == "GET":
         if query_type == 0:
             res = db.session.query(Device_information).filter(Device_information.device_name.like("%"+name+"%")).paginate(page, per_page, error_out=False)
