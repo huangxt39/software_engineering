@@ -1,0 +1,688 @@
+{
+	"info": {
+		"_postman_id": "6b296858-fc76-44f2-b808-7f80d82130d4",
+		"name": "web端测试",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "设备搜索",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/admin_device/query?query_type=2&name=无人机&type_id=3",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_device",
+						"query"
+					],
+					"query": [
+						{
+							"key": "query_type",
+							"value": "2"
+						},
+						{
+							"key": "name",
+							"value": "无人机"
+						},
+						{
+							"key": "type_id",
+							"value": "3"
+						}
+					]
+				},
+				"description": "设备查询"
+			},
+			"response": []
+		},
+		{
+			"name": "管理员添加设备之上传图片",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "upload",
+							"type": "file",
+							"src": "/C:/Users/HUI/Desktop/白海豚宣传照片/SYSU0062.JPG"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/admin_device/upload_img",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_device",
+						"upload_img"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "管理员获得设备图片",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_device/get_img?path=./device_manager/static/img/device/F550.jpg",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_device",
+						"get_img"
+					],
+					"query": [
+						{
+							"key": "path",
+							"value": "./device_manager/static/img/device/F550.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "设备删除",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_device/delete?type_id=7&query_type=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_device",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "type_id",
+							"value": "7"
+						},
+						{
+							"key": "query_type",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "管理员设备添加",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_device/add?type_id=3&device_name=测试设备，测测测&description\n=我就测试一下&total_num=5&available_num=5&image=./device_manager/static/img/device/None.jpg&position=测试用地方&big_type_id=99&cost=50&index1=0.25&index2=50",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_device",
+						"add"
+					],
+					"query": [
+						{
+							"key": "type_id",
+							"value": "3"
+						},
+						{
+							"key": "device_name",
+							"value": "测试设备，测测测"
+						},
+						{
+							"key": "description\n",
+							"value": "我就测试一下"
+						},
+						{
+							"key": "total_num",
+							"value": "5"
+						},
+						{
+							"key": "available_num",
+							"value": "5"
+						},
+						{
+							"key": "image",
+							"value": "./device_manager/static/img/device/None.jpg"
+						},
+						{
+							"key": "position",
+							"value": "测试用地方"
+						},
+						{
+							"key": "big_type_id",
+							"value": "99"
+						},
+						{
+							"key": "cost",
+							"value": "50"
+						},
+						{
+							"key": "index1",
+							"value": "0.25"
+						},
+						{
+							"key": "index2",
+							"value": "50"
+						},
+						{
+							"key": "student_limit",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "student_limit_time",
+							"value": "30",
+							"disabled": true
+						},
+						{
+							"key": "teacher_limit",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "teacher_limit_time",
+							"value": "30",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "逾期获取",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_problem/due?order=2&page=1&per_page=4",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_problem",
+						"due"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "设备占用率",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_record/figure?type_id=3&time=15",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_record",
+						"figure"
+					],
+					"query": [
+						{
+							"key": "type_id",
+							"value": "3"
+						},
+						{
+							"key": "time",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "管理员注册",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_login/signup?email=huangrh9@mail2.sysu.edu.cn&password=123456&phone=13640417899&description=测试注册&user_id=17363031&name=黄润辉",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_login",
+						"signup"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "huangrh9@mail2.sysu.edu.cn"
+						},
+						{
+							"key": "password",
+							"value": "123456"
+						},
+						{
+							"key": "phone",
+							"value": "13640417899"
+						},
+						{
+							"key": "description",
+							"value": "测试注册"
+						},
+						{
+							"key": "user_id",
+							"value": "17363031"
+						},
+						{
+							"key": "name",
+							"value": "黄润辉"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "读取注册管理员列表",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_login/read_signup",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_login",
+						"read_signup"
+					],
+					"query": [
+						{
+							"key": "type_id",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "time",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "批准管理员注册申请",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_login/check_signup?account=huangrh9@mail2.sysu.edu.cn",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_login",
+						"check_signup"
+					],
+					"query": [
+						{
+							"key": "account",
+							"value": "huangrh9@mail2.sysu.edu.cn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "管理员登录",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_login/login?account=huangrh9@mail2.sysu.edu.cn&password=123456",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_login",
+						"login"
+					],
+					"query": [
+						{
+							"key": "account",
+							"value": "huangrh9@mail2.sysu.edu.cn"
+						},
+						{
+							"key": "password",
+							"value": "123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "设备损坏处理",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_problem/damage?order=2&page=1&per_page=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_problem",
+						"damage"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "1"
+						},
+						{
+							"key": "order",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "发钱",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/admin_setting/give_money?money=500",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_setting",
+						"give_money"
+					],
+					"query": [
+						{
+							"key": "money",
+							"value": "500"
+						},
+						{
+							"key": "time",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户搜索",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/admin_user/query?query_type=0&user_name=黄&user_id=1736&user_type=学生",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_user",
+						"query"
+					],
+					"query": [
+						{
+							"key": "query_type",
+							"value": "0"
+						},
+						{
+							"key": "user_name",
+							"value": "黄"
+						},
+						{
+							"key": "user_id",
+							"value": "1736"
+						},
+						{
+							"key": "user_type",
+							"value": "学生"
+						}
+					]
+				},
+				"description": "设备查询"
+			},
+			"response": []
+		},
+		{
+			"name": "用户删除",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/admin_user/delete_account?user_id=11111111",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_user",
+						"delete_account"
+					],
+					"query": [
+						{
+							"key": "query_type",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "user_name",
+							"value": "黄",
+							"disabled": true
+						},
+						{
+							"key": "user_id",
+							"value": "11111111"
+						},
+						{
+							"key": "user_type",
+							"value": "学生",
+							"disabled": true
+						}
+					]
+				},
+				"description": "设备查询"
+			},
+			"response": []
+		},
+		{
+			"name": "添加新的设备大类型",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/admin_device/add_big_type?big_type_name=测试用例2",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin_device",
+						"add_big_type"
+					],
+					"query": [
+						{
+							"key": "query_type",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "user_name",
+							"value": "黄",
+							"disabled": true
+						},
+						{
+							"key": "big_type_name",
+							"value": "测试用例2"
+						},
+						{
+							"key": "user_type",
+							"value": "学生",
+							"disabled": true
+						}
+					]
+				},
+				"description": "设备查询"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

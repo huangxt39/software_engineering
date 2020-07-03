@@ -44,10 +44,26 @@ def get_image():
         # img = Response(img_stream, mimetype="image/jpeg")
         # return_dict["code"] = 1
         # return_dict["img"] = img_stream
+        return img_stream
     else:
-        return_dict["code"] = -1
+        return jsonify({"code":0})
     # return jsonify(return_dict)
-    return img_stream
+
+@admin_device.route('/add_big_type', methods=['GET','POST'])
+def add_big_type():
+    return_dict = {}
+
+    big_type_name = request.values.get("big_type_name")
+    if big_type_name:
+        new_big_type = Device_big_type()
+        new_big_type.big_type_name = big_type_name
+        db.session.add(new_big_type)
+        db.session.commit()
+        return_dict["big_type_id"] = new_big_type.big_type_id
+        return_dict["code"] = 1
+    else:
+        return_dict["code"] = 0
+    return jsonify(return_dict)
 
 @admin_device.route('/add', methods=['GET','POST'])
 def add():
@@ -72,6 +88,7 @@ def add():
     cost = request.values.get("cost")
     index1 = request.values.get("index1")
     index2 = request.values.get("index2")
+    appendix = request.values.get("appendix")
 
     if cost:
         cost = int(cost)
@@ -100,14 +117,15 @@ def add():
         new_device.description = description
         new_device.total_num=int(total_num)
         new_device.available_num=int(available_num)
-        new_device.student_limit_time=int(student_limit_time)
-        new_device.student_limit=int(student_limit)
-        new_device.teacher_limit=int(teacher_limit)
-        new_device.teacher_limit_time=int(teacher_limit_time)
+        new_device.student_limit_time=student_limit_time
+        new_device.student_limit=student_limit
+        new_device.teacher_limit=teacher_limit
+        new_device.teacher_limit_time=teacher_limit_time
         new_device.cost=cost
         new_device.index1=index1
         new_device.index2=index2
         new_device.real_cost=real_cost
+        new_device.appendix = appendix
         if image is not None:
             new_device.image=image 
         if type_id is None:
@@ -129,21 +147,63 @@ def query():
     
     name = request.values.get("name")
     type_id = request.values.get("type_id")
-    query_type = int(request.values.get("query_type"))
-    page = int(request.values.get("page"))
-    per_page = int(request.values.get("per_page"))
+    query_type = request.values.get("query_type")
+    page = request.values.get("page")
+    per_page = request.values.get("per_page")
+    if query_type is None:
+        query_type = 0
+    else:
+        query_type = int(query_type)
+    if page is None:
+        page = 0
+    else:
+        page = int(page)
+    if per_page is None:
+        per_page = 5
+    else:
+        per_page = int(per_page)
+
     if request.method == "GET":
         if query_type == 0:
-            res = db.session.query(Device_information).filter(Device_information.device_name.like("%"+name+"%")).paginate(page, per_page, error_out=False)
+            res = db.session.query(Device_information.type_id, Device_information.device_name, Device_information.total_num, Device_information.available_num,\
+                Device_information.description, Device_information.image, Device_information.real_cost, Device_information.cost, Device_information.index1, Device_information.index2, \
+                    Device_information.student_limit, Device_information.student_limit_time, Device_information.teacher_limit, Device_information.teacher_limit_time,\
+                        Device_big_type.big_type_name).filter(Device_information.big_type_id == Device_big_type.big_type_id).paginate(page, per_page, error_out=False)
             return_dict["pages"] =  res.pages
             return_dict["total"] = res.total
             items = res.items
             return_dict["result"] = query2dict(items)
             return_dict["code"] = 1
+
         elif query_type == 1:
-            res = db.session.query(Device_information).filter(Device_information.type_id == type_id).first()
-            return_dict["result"] = query2dict(res)
+            res = db.session.query(Device_information.type_id, Device_information.device_name, Device_information.total_num, Device_information.available_num,\
+                Device_information.description, Device_information.image, Device_information.real_cost, Device_information.cost, Device_information.index1, Device_information.index2, \
+                    Device_information.student_limit, Device_information.student_limit_time, Device_information.teacher_limit, Device_information.teacher_limit_time,\
+                        Device_big_type.big_type_name).filter(Device_information.big_type_id == Device_big_type.big_type_id).\
+                            filter(Device_information.device_name.like("%"+name+"%")).paginate(page, per_page, error_out=False)
+            return_dict["pages"] = res.pages
+            return_dict["total"] = res.total
+            items = res.items
+            return_dict["result"] = query2dict(items)
             return_dict["code"] = 1
+        
+        elif query_type == 2:
+            if type_id:
+                res = db.session.query(Device_information.type_id, Device_information.device_name, Device_information.total_num, Device_information.available_num,\
+                    Device_information.description, Device_information.image, Device_information.real_cost, Device_information.cost, Device_information.index1, Device_information.index2, \
+                        Device_information.student_limit, Device_information.student_limit_time, Device_information.teacher_limit, Device_information.teacher_limit_time,\
+                            Device_big_type.big_type_name).filter(Device_information.big_type_id == Device_big_type.big_type_id).\
+                                filter(Device_information.type_id == type_id).all()
+
+                if len(res) == 1:
+                    return_dict["result"] = query2dict(res)
+                    return_dict["code"] = 1
+                else:
+                    return_dict["code"] = -1
+                    return_dict["info"] = "type_id找不到这个设备"
+            else:
+                return_dict["code"] = -1
+                return_dict["info"] = "type_id找不到这个设备"
         else:
             return_dict["code"] = 0
     else:

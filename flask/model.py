@@ -23,8 +23,8 @@ class 管理员表(师生信息表):
     user_id = db.Column(db.ForeignKey('师生信息表.id', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, info='学号/工号')
     name = db.Column(db.String(255), info='姓名')
     phone = db.Column(db.String(20), info='电话')
-    email = db.Column(db.String(50, 'utf8_general_ci'), info='邮箱')
-    account = db.Column(db.String(20), info='账号')
+    email = db.Column(db.String(255, 'utf8_general_ci'), info='邮箱')
+    account = db.Column(db.String(255, 'utf8_general_ci'), info='账号')
     password = db.Column(db.String(20, 'utf8_general_ci'), info='密码')
     description = db.Column(db.String(255), info='申请描述')
 
@@ -36,8 +36,8 @@ class 待审核管理员表(db.Model):
     user_id = db.Column(db.String(20), primary_key=True, info='学号/工号')
     name = db.Column(db.String(255), info='姓名')
     phone = db.Column(db.String(20), info='电话')
-    email = db.Column(db.String(50, 'utf8_general_ci'), info='邮箱')
-    account = db.Column(db.String(20), info='账号')
+    email = db.Column(db.String(255, 'utf8_general_ci'), info='邮箱')
+    account = db.Column(db.String(255, 'utf8_general_ci'), info='账号')
     password = db.Column(db.String(20, 'utf8_general_ci'), info='密码')
     description = db.Column(db.String(255), info='申请描述')
 
@@ -95,6 +95,14 @@ class 用户表(db.Model):
 
 
 
+class 管理员参数(db.Model):
+    __tablename__ = '管理员参数'
+
+    param = db.Column(db.String(255, 'utf8_general_ci'), primary_key=True, info='各种参数')
+    values = db.Column(db.String(255), info='参数值')
+
+
+
 class 订单状态表(db.Model):
     __tablename__ = '订单状态表'
 
@@ -121,6 +129,7 @@ class 设备信息表(db.Model):
     index1 = db.Column(db.Numeric(10, 2), info='虚拟币指数1')
     index2 = db.Column(db.Numeric(10, 2), info='虚拟币指数2')
     real_cost = db.Column(db.Numeric(10, 2), info='实际虚拟币花费')
+    appendix = db.Column(db.String(255), info='配件列表')
 
 
 
@@ -146,7 +155,7 @@ class 设备大类型表(db.Model):
     __tablename__ = '设备大类型表'
 
     big_type_id = db.Column(db.Integer, primary_key=True, info='类型id')
-    name = db.Column(db.String(10, 'utf8_general_ci'), info='设备名称')
+    big_type_name = db.Column(db.String(10, 'utf8_general_ci'), info='设备名称')
 
 
 

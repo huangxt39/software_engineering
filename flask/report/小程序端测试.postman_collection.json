@@ -6,12 +6,12 @@
 	},
 	"item": [
 		{
-			"name": "127.0.0.1:5000/wx_login/signup?user_type=1&user_id=17363030&name=测试人",
+			"name": "注册",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "127.0.0.1:5000/wx_login/signup?user_type=1&user_id=17363030&name=测试人",
+					"raw": "127.0.0.1:5000/wx_login/signup?user_type=1&user_id=1717171&name=测试人",
 					"host": [
 						"127",
 						"0",
@@ -30,39 +30,20 @@
 						},
 						{
 							"key": "user_id",
-							"value": "17363030"
+							"value": "1717171"
 						},
 						{
 							"key": "name",
 							"value": "测试人"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "127.0.0.1:5000/wx_device/get_device?type_id=0",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "127.0.0.1:5000/wx_device/get_device",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"wx_device",
-						"get_device"
-					],
-					"query": [
+						},
 						{
-							"key": "type_id",
-							"value": "0",
+							"key": "platCode",
+							"value": "033ZTSAi0JROer15eHDi0B19Bi0ZTSAW",
+							"disabled": true
+						},
+						{
+							"key": "platUserInfoMap",
+							"value": "[object Object]",
 							"disabled": true
 						}
 					]
@@ -71,7 +52,53 @@
 			"response": []
 		},
 		{
-			"name": "127.0.0.1:5000/wx_device/device_type",
+			"name": "登录",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_login/login?user_type=1&user_id=1717171&name=测试人",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_login",
+						"login"
+					],
+					"query": [
+						{
+							"key": "user_type",
+							"value": "1"
+						},
+						{
+							"key": "user_id",
+							"value": "1717171"
+						},
+						{
+							"key": "name",
+							"value": "测试人"
+						},
+						{
+							"key": "platCode",
+							"value": "033ZTSAi0JROer15eHDi0B19Bi0ZTSAW",
+							"disabled": true
+						},
+						{
+							"key": "platUserInfoMap",
+							"value": "[object Object]",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查询大类别信息",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -100,35 +127,7 @@
 			"response": []
 		},
 		{
-			"name": "127.0.0.1:5000/wx_device/type_name?big_type_id=2",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "127.0.0.1:5000/wx_device/type_name?big_type_id=2",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"wx_device",
-						"type_name"
-					],
-					"query": [
-						{
-							"key": "big_type_id",
-							"value": "2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "127.0.0.1:5000/wx_device/get_img?path=./device_manager/static/img/device/F550.jpg",
+			"name": "获得设备图片",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -156,12 +155,68 @@
 			"response": []
 		},
 		{
-			"name": "127.0.0.1:5000/admin_record/figure?type_id=1 Copy",
+			"name": "根据设备大类获得设备种类",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "127.0.0.1:5000/wx_record/figure?user_id=1&num=3",
+					"raw": "127.0.0.1:5000/wx_device/type_name?big_type_id=99",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_device",
+						"type_name"
+					],
+					"query": [
+						{
+							"key": "big_type_id",
+							"value": "99"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获得单个设备类型信息",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_device/get_device?type_id=3",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_device",
+						"get_device"
+					],
+					"query": [
+						{
+							"key": "type_id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "借用设备",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_record/add?user_id=17363031&device_type_id=3&num=2&borrow_reason=借来玩玩&book_borrow_time=2020-06-07&book_return_time=2020-07-06",
 					"host": [
 						"127",
 						"0",
@@ -171,16 +226,311 @@
 					"port": "5000",
 					"path": [
 						"wx_record",
-						"figure"
+						"add"
 					],
 					"query": [
 						{
 							"key": "user_id",
-							"value": "1"
+							"value": "17363031"
+						},
+						{
+							"key": "device_type_id",
+							"value": "3"
 						},
 						{
 							"key": "num",
-							"value": "3"
+							"value": "2"
+						},
+						{
+							"key": "borrow_reason",
+							"value": "借来玩玩"
+						},
+						{
+							"key": "book_borrow_time",
+							"value": "2020-06-07"
+						},
+						{
+							"key": "book_return_time",
+							"value": "2020-07-06"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "订单取消",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_record/check?record_id=202006286e4ed90693&user_id=17363031",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_record",
+						"check"
+					],
+					"query": [
+						{
+							"key": "record_id",
+							"value": "202006286e4ed90693"
+						},
+						{
+							"key": "user_id",
+							"value": "17363031"
+						},
+						{
+							"key": "num",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "borrow_reason",
+							"value": "借来玩玩",
+							"disabled": true
+						},
+						{
+							"key": "book_borrow_time",
+							"value": "2020-06-07",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "设备确认领取",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_record/check?record_id=202006286e4ed90693&user_id=17363031",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_record",
+						"check"
+					],
+					"query": [
+						{
+							"key": "record_id",
+							"value": "202006286e4ed90693"
+						},
+						{
+							"key": "user_id",
+							"value": "17363031"
+						},
+						{
+							"key": "num",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "borrow_reason",
+							"value": "借来玩玩",
+							"disabled": true
+						},
+						{
+							"key": "book_borrow_time",
+							"value": "2020-06-07",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "设备归还",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_record/return?record_id=202006286e4ed90693&user_id=17363031",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_record",
+						"return"
+					],
+					"query": [
+						{
+							"key": "record_id",
+							"value": "202006286e4ed90693"
+						},
+						{
+							"key": "user_id",
+							"value": "17363031"
+						},
+						{
+							"key": "num",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "borrow_reason",
+							"value": "借来玩玩",
+							"disabled": true
+						},
+						{
+							"key": "book_borrow_time",
+							"value": "2020-06-07",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户查询所有记录",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_record/get_record?user_id=17363031&page=0&per_page=2",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_record",
+						"get_record"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "17363031"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "per_page",
+							"value": "2"
+						},
+						{
+							"key": "borrow_reason",
+							"value": "借来玩玩",
+							"disabled": true
+						},
+						{
+							"key": "book_borrow_time",
+							"value": "2020-06-07",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户查询单个记录",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_record/get_single_record?user_id=17363031&record_id=20200627920eb8fe8e",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_record",
+						"get_single_record"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "17363031"
+						},
+						{
+							"key": "record_id",
+							"value": "20200627920eb8fe8e"
+						},
+						{
+							"key": "per_page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "borrow_reason",
+							"value": "借来玩玩",
+							"disabled": true
+						},
+						{
+							"key": "book_borrow_time",
+							"value": "2020-06-07",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "损坏上报",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wx_record/damage_report?record_id=20200628fa84fe4ca7&user_id=17363031&device_id=112233445566&description=我玩着玩着就坏了hhh",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wx_record",
+						"damage_report"
+					],
+					"query": [
+						{
+							"key": "record_id",
+							"value": "20200628fa84fe4ca7"
+						},
+						{
+							"key": "user_id",
+							"value": "17363031"
+						},
+						{
+							"key": "device_id",
+							"value": "112233445566"
+						},
+						{
+							"key": "description",
+							"value": "我玩着玩着就坏了hhh"
+						},
+						{
+							"key": "book_borrow_time",
+							"value": "2020-06-07",
+							"disabled": true
 						}
 					]
 				}

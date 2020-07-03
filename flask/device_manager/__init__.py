@@ -1,9 +1,10 @@
 from flask import Flask
 from werkzeug.utils import import_string
-from device_manager.models import db
+from device_manager.models import db #, scheduler
 import device_manager.utils.global_var as gol
 from flask_cors import *
 import platform
+
 
 if platform.system() == "Windows":
     root = "108.166.209.115"
@@ -26,6 +27,7 @@ bps = {
         "admin_record":'device_manager.views.website.admin_record:admin_record',
         "admin_setting":'device_manager.views.website.admin_setting:admin_setting',
 }
+
 
 def create_app():
     # 配置额外连接的数据库
@@ -56,6 +58,9 @@ def create_app():
     
     app.debug = True # 开启debug模式
 
+    # scheduler.init_app(app)
+    # scheduler.start()
+    
     db.init_app(app) # 注册数据库
     db.reflect(app=app)  # 映射已有数据库
 

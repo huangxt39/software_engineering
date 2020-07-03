@@ -2,10 +2,13 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String
 import device_manager.utils.global_var as gol
+# from flask_apscheduler import APScheduler
+# from flask_apscheduler.blocking import BlockingScheduler
 gol._init()
 gol.set_value("debug",0)
 # debug = 0
 db = SQLAlchemy(use_native_unicode='utf8')
+# scheduler=BlockingScheduler()
 
 ## 生成models
 # flask-sqlacodegen "mysql+pymysql://root:123456@108.166.209.115:3306/设备管理" --outfile model.py --flask
@@ -52,6 +55,15 @@ class Manager(db.Model):
     password = db.Column(db.String(20), info='密码')
     description = db.Column(db.String(255), info='申请描述')
 
+class Manager_param(db.Model):
+    __tablename__ = '管理员参数'
+    __bind_key__ = 'manager'
+
+    param = db.Column(db.String(255, 'utf8_general_ci'), primary_key=True, info='各种参数')
+    values = db.Column(db.String(255), info='参数值')
+
+
+
 class Pre_Manager(db.Model):
     __tablename__ = '待审核管理员表'
     __bind_key__ = 'manager'
@@ -86,12 +98,13 @@ class Device_information(db.Model):
     index1 = db.Column(db.Numeric(10, 2), info='虚拟币指数1')
     index2 = db.Column(db.Numeric(10, 2), info='虚拟币指数2')
     real_cost = db.Column(db.Numeric(10, 2), info='虚拟币实际花费')
+    appendix = db.Column(db.String(255), info='配件列表')
 
 class Device_big_type(db.Model):
     __tablename__ = '设备大类型表'
     __bind_key__ = 'manager'
     big_type_id = db.Column(db.Integer, primary_key=True, info='类型id')
-    name = db.Column(db.String(10, 'utf8_general_ci'), info='设备名称')
+    big_type_name = db.Column(db.String(10, 'utf8_general_ci'), info='设备名称')
 
 
 # class Signal_device(db.Model):
@@ -228,3 +241,9 @@ def query2dict(model_list):
         else:    #这种方式获得了数据库中的个别字段  相当于select id,name from table limit = 1
             return dict(zip(model_list.keys(),model_list))
 
+
+def get_manger_params():
+    params = db.session.query(Manager_param).all()
+    params = query2dict(params)
+    params = {i["param"]:i["values"] for i in params}
+    return params

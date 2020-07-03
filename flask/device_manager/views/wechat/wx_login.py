@@ -105,7 +105,6 @@ def delete_account():
     return_dict = {}
     user_id = request.values.get("user_id")
     res = db.session.query(User).filter(User.user_id == user_id).all()
-    print(res)
     if len(res) == 1:
         db.session.delete(res[0])
         db.session.commit()
