@@ -1,4 +1,6 @@
 // pages/addOrEditUser/addOrEditUser.js
+const app = getApp()
+
 Page({
 
   /**
@@ -8,6 +10,23 @@ Page({
     info:{},
   },
 
+  delete_account() {
+    console.log(app.globalData.userInfo.user_id)
+    wx.request({
+      url:'https://reck.sakurasou.life/wx_login/delete_account', //后端数据接口
+      // url:'http://127.0.0.1:5000/login/login.msg', //必填，其他的都可以不填
+      header:{  
+        'content-type':'application/x-www-form-urlencoded;charset=utf-8',
+        'Accept': 'application/json'
+      },
+      method:'POST',  
+      //dataType:"json",
+      data:{user_id: app.globalData.userInfo.user_id},
+      success: function (res){ //调用成功之后获得的数据在res
+        console.log(res.data)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

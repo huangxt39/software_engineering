@@ -1,0 +1,72 @@
+<!--pages/document/document.wxml-->
+<view class="container">
+  <view class="header-block">
+    <view class="header-option"  bindtap="not_start">
+      <text class="option-block" style="color: {{not_start_color}}">未开始</text>
+      <view class="bottom-line" wx:if="{{now_active==0}}"></view>
+    </view>
+    <view class="header-option" bindtap="on_going">
+      <text class="option-block" style="color: {{on_going_color}}">进行中</text>
+      <view class="bottom-line" wx:if="{{now_active==1}}"></view>
+    </view>
+    <view class="header-option" bindtap="has_ended">
+      <text class="option-block" style="color: {{has_ended_color}}">已结束</text>
+      <view class="bottom-line" wx:if="{{now_active==2}}"></view>
+    </view>
+  </view>
+  <view class="list-block">
+    <view class="list-order-block">
+      <text style="margin-right: 30rpx; color: #606266">排序方式</text>
+      <view class="radio-item" bindtap="select_early">
+        <image class="radio-img" wx:if="{{late}}" src="../../images/radio1.png"></image>
+        <image class="radio-img" wx:else src="../../images/radio2.png"></image>
+        <text style="margin-left: 10rpx; color: {{early_text}}">最早</text>
+      </view>
+      <view class="radio-item" bindtap="select_late">
+        <image class="radio-img" wx:if="{{late}}" src="../../images/radio2.png"></image>
+        <image class="radio-img" wx:else src="../../images/radio1.png"></image>
+        <text style="margin-left: 10rpx; color: {{late_text}}">最晚</text>
+      </view>
+    </view>
+    <block wx:for="{{now_list}}">
+      <view class="list-item-block" style="background-color: {{item.status=='已逾期' ? 'rgb(253,226,226)' : '' }}">
+        <view class="list-item-head">
+          <text style="margin-top: 20rpx; margin-left:30rpx">{{item.order_id}}</text>
+          <view wx:if="{{item.status=='已逾期'}}" class="status-block" style="background-color: #F56C6C; color: #FFFFFF">{{item.status}}</view>
+          <view wx:elif="{{item.status=='未归还'}}" class="status-block" style="background-color: rgb(250,236,216)">{{item.status}}</view>
+          <view wx:elif="{{item.status=='待领取'}}" class="status-block" style="background-color: rgb(225,243,216)">{{item.status}}</view>
+          <view wx:else class="status-block">{{item.status}}</view>
+        </view>
+        <view class="list-item-body">
+          <image src="{{item.im}}" style="width: 200rpx; height: 200rpx"></image>
+          <view style="display:flex; flex-direction: column; justify-content:space-evenly; width: 380rpx; margin-left:30rpx;">
+            <view style="display:flex; justify-content: space-between">
+              <text style=" font-size: 35rpx">{{item.name}}</text>
+              <text style="">x {{item.num}}</text>
+            </view>
+            <view style="display:flex; justify-content: space-between">
+              <text>{{item.start_time}}</text>
+              <text>to</text>
+              <text>{{item.end_time}}</text>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.status=='已逾期'||item.status=='未归还'}}" class="list-item-footer">
+          <view class="list-item-button">损坏上报</view>
+          <view class="list-item-button-primary">确认归还</view>
+        </view>
+        <view wx:elif="{{item.status=='待领取'}}" class="list-item-footer">
+          <view class="list-item-button">取消订单</view>
+          <view class="list-item-button">损坏上报</view>
+          <view class="list-item-button-primary">确认借用</view>
+        </view>
+        <view wx:elif="{{item.status=='未开始'}}" class="list-item-footer">
+          <view class="list-item-button">取消订单</view>
+        </view>
+        <view wx:elif="{{item.status=='已结束'}}" class="list-item-footer">
+          <view class="list-item-button">损坏上报</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

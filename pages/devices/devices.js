@@ -70,7 +70,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.request({
+      url:'https://reck.sakurasou.life/wx_device/device_type', //后端数据接口
+      // url:'http://127.0.0.1:5000/login/login.msg', //必填，其他的都可以不填
+      header:{  
+        'content-type':'application/x-www-form-urlencoded;charset=utf-8',
+        'Accept': 'application/json'
+      },
+      method:'GET',  
+      //dataType:"json",
+      success: function (res){ //调用成功之后获得的数据在res
+        //console.log("request success: res",res)
+        if (res.data.code==1){
+          that.globalData.userInfo= res.data.result[0]
+          console.log("自动登录",res.data.result[0])
+        }
+        else{
+          that.globalData.has_signed=false
+        }
+        if (that.action) {
+          that.action()
+        }
+      },
+    })
   },
 
   /**

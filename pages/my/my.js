@@ -1,4 +1,6 @@
 // pages/my/my.js
+const app=getApp()
+
 Page({
 
   /**
@@ -19,8 +21,9 @@ Page({
   onLoad: function (options) {
     //用户登录 获取头像 获取id等等
     this.setData({
-      user_info: {id:"wx-sieusiaon", type: '学生', name:'黄鑫霆',stu_fac_id:'1736363636',bor_now:'2',bor_history:'100',money:'300',violate:'2',
-      email:'1710019999@qq.com', phone:'15170829361',description:'我是中山大学2017级智能科学与技术专业本科生'}
+      // user_info: {type: '学生', name:'黄鑫霆',user_id:'1736363636',bor_now:'2',bor_history:'100',money:'300',violate:'2',
+      // email:'1710019999@qq.com', phone:'15170829361',description:'我是中山大学2017级智能科学与技术专业本科生'}
+      user_info: app.globalData.userInfo
     })
   },
 

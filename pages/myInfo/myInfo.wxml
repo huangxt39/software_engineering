@@ -6,23 +6,14 @@
     <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
             <view class="weui-label labelCss">
-              <text class="textCss">姓名:</text>
+              <text class="textCss">账户类型:</text>
             </view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.name}}"/>
+            <input class="weui-input inputCss" disabled="true" placeholder-class="place-holder" value="{{info.type}}"/>
         </view>
     </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-          <view class="weui-label labelCss">
-            <text class="textCss">学号:</text>
-          </view>
-      </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input inputCss" placeholder-class="place-holder" value="{{info.stu_fac_id}}" type="number"/>
-      </view>
-    </view>
+    
     <view class="weui-cell weui-cell_input">
         <view class="weui-label labelCss">
           <text class="textCss">电子邮箱:</text>
@@ -46,6 +37,6 @@
   </view>
   <view style="width: 500rpx; margin: 40rpx; display: flex; justify-content: space-around">
       <button style="font-size: 35rpx" type="default" size="mini" bindtap="addUser">修改信息</button>
-      <button style="font-size: 35rpx"  type="warn" size="mini" bindtap="addUser">注销账号</button>
+      <button style="font-size: 35rpx"  type="warn" size="mini" bindtap="delete_account">注销账号</button>
   </view>
 </view>

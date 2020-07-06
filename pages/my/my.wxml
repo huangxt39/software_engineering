@@ -3,8 +3,8 @@
     <view class="head">
       <image class="avatar" src="{{userInfo.avatar}}"  mode="cover"></image>
       <view class="name-num">
-        <text style="font-size: 40rpx; color: #2699FB">{{user_info.name}}</text>
-        <text style="color: #2699FB">{{user_info.stu_fac_id}}</text>
+        <text style="font-size: 40rpx; color: #2699FB">{{user_info.user_name}}</text>
+        <text style="color: #2699FB">{{user_info.user_id}}</text>
       </view>
     </view>
     <image class="edit-icon" src="{{edit_icon}}" bindtap="goDetail"></image>
@@ -21,8 +21,8 @@
     </view>
     <view class="divider"></view>
     <view class="middle-item">
-      <text class="middle-value">{{user_info.type}}</text>
-      <text class="middle-label">账户类型</text>
+      <text class="middle-value">{{user_info.violate}}</text>
+      <text class="middle-label">违规次数</text>
     </view>
   </view>
   <view class="pane">

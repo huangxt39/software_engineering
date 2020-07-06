@@ -1,17 +1,18 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/devices/devices",
     "pages/borrow/borrow",
     "pages/return/return",
     "pages/damage/damage",
     "pages/devicesDetail/devicesDetail",
     "pages/login.success/login.success",
-    "pages/login/login",
     "pages/order/order",
     "pages/record/record",
     "pages/orderdetail/orderdetail",
     "pages/my/my",
-    "pages/myInfo/myInfo"
+    "pages/myInfo/myInfo",
+    "pages/document/document"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -32,7 +33,7 @@
         "selectedIconPath": "./images/tabbar-icon-popular-active.png"
       },
       {
-        "pagePath": "pages/record/record",
+        "pagePath": "pages/document/document",
         "text": "记录",
         "iconPath": "./images/tabbar-icon-teams-normal.png",
         "selectedIconPath": "./images/tabbar-icon-teams-active.png"

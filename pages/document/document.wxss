@@ -1,0 +1,86 @@
+/* pages/document/document.wxss */
+.header-block {
+  display: flex;
+  justify-content: space-around;
+  height: 80rpx;
+  align-items: center;
+  /* border-bottom: 2rpx solid #E4E7ED; */
+}
+
+.header-option{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200rpx;
+}
+
+.bottom-line{
+  border-bottom: 3rpx solid #2699FB;
+  width: 100rpx;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  margin-right: 30rpx;
+}
+
+.list-order-block {
+  margin: 20rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.radio-img {
+  width:40rpx;
+  height:40rpx;
+}
+
+.list-item-block{
+  border-radius: 20rpx;
+  margin: 35rpx;
+  background-color: #F6FAFF;
+}
+
+.list-item-head{
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-block {
+  margin-top: 20rpx;
+  margin-right: 30rpx;
+  font-size: 35rpx;
+  padding: 0rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.list-item-body {
+  display: flex;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.list-item-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list-item-button {
+  border: 4rpx solid #DCDFE6;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+  padding: 0rpx 20rpx;
+}
+
+.list-item-button-primary {
+  border: 4rpx solid #2699FB;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+  padding: 0rpx 20rpx;
+  color: #2699FB;
+}

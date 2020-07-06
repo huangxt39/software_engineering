@@ -1,4 +1,6 @@
 // pages/login.success/login.success.js
+const app = getApp()
+
 Page({
 
   /**

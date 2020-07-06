@@ -1,20 +1,67 @@
 //app.js
 App({
   onLaunch: function () {
-    
-    if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-    } else {
-      wx.cloud.init({
-        // env 参数说明：
-        //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
-        //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
-        //   如不填则使用默认环境（第一个创建的环境）
-        // env: 'my-env-id',
-        traceUser: true,
-      })
-    }
 
-    this.globalData = {}
+    // 登录
+    wx.login({
+      success: res => {
+        console.log("login res: ",res)
+        this.globalData.code=res.code
+        wx.getSetting({
+          success: res => {
+            if (res.authSetting['scope.userInfo']) {
+              // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+              wx.showLoading({title: '登录中'})
+              wx.getUserInfo({
+                success: res => {
+    
+                  var that= this
+                  console.log("getUserInfo res:",res)
+                  var platUserInfoMap = {}
+                  platUserInfoMap["encryptedData"] = res.encryptedData;
+                  platUserInfoMap["iv"] = res.iv;
+    
+                  let data={ platCode: that.globalData.code,
+                    platUserInfoMap: platUserInfoMap}
+                    console.log(data)
+                  wx.request({
+                    url:'https://reck.sakurasou.life/wx_login/login', //后端数据接口
+                    // url:'http://127.0.0.1:5000/login/login.msg', //必填，其他的都可以不填
+                    header:{  
+                      'content-type':'application/x-www-form-urlencoded;charset=utf-8',
+                      'Accept': 'application/json'
+                    },
+                    method:'POST',  
+                    //dataType:"json",
+                    data:{ platCode: that.globalData.code,
+                            platUserInfoMap: platUserInfoMap},
+                    success: function (res){ //调用成功之后获得的数据在res
+                      //console.log("request success: res",res)
+                      if (res.data.code==1){
+                        that.globalData.userInfo= res.data.result[0]
+                        console.log("自动登录",res.data.result[0])
+                      }
+                      else if (res.data.code==0){
+                        that.globalData.has_signed=false
+                      }
+                      if (that.action) {
+                        that.action()
+                      }
+                    },
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
+    })
+    // 获取用户信息
+    
+  },
+  globalData: {
+    code: null,
+    userInfo: null,
+    has_signed: true,
   }
 })

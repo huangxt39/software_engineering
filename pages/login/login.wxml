@@ -15,7 +15,8 @@
         <checkbox style="transform: scale(0.7); margin-bottom: 20rpx" value="checked"><text style="color:#2699FB; text-decoration-line: underline; font-size: 35rpx; ">我已阅读并同意用户须知</text></checkbox>
       </checkbox-group>
     </view>
-    <button class="submit-button" style="width: 560rpx" form-type="submit">确认</button>
+    <button wx:if="{{!authorized && canIUse}}" class="submit-button" style="width: 560rpx" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button wx:else class="submit-button" style="width: 560rpx" form-type="submit">确认</button>
   </form>
   <mp-dialog show="{{showDialog}}" bindbuttontap="tapDialogButton" buttons="{{[{text:'确定'}]}}">
     <view>{{message}}</view>
