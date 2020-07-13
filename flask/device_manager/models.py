@@ -2,13 +2,12 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String
 import device_manager.utils.global_var as gol
-# from flask_apscheduler import APScheduler
-# from flask_apscheduler.blocking import BlockingScheduler
+from flask_apscheduler import APScheduler
 gol._init()
 gol.set_value("debug",0)
 # debug = 0
 db = SQLAlchemy(use_native_unicode='utf8')
-# scheduler=BlockingScheduler()
+scheduler=APScheduler()
 
 ## 生成models
 # flask-sqlacodegen "mysql+pymysql://root:123456@108.166.209.115:3306/设备管理" --outfile model.py --flask
@@ -175,7 +174,7 @@ class Borrow_record(db.Model):
     actual_return_time = db.Column(db.DateTime, info='实际归还时间')
     user_id = db.Column(db.String(8, 'utf8_general_ci'), info='用户id')
     borrow_reason = db.Column(db.String(255, 'utf8_general_ci'), server_default=db.FetchedValue(), info='借用理由')
-    state_id = db.Column(db.String(10, 'utf8_general_ci'), info='订单状态')
+    state_id = db.Column(db.Integer, info='订单状态')
     device_type = db.Column(db.Integer, info='类型id')
     num = db.Column(db.Integer, info='借用数量')
     cost = db.Column(db.Numeric(10, 2), info='虚拟币花费')
@@ -212,6 +211,7 @@ class Demage_devices(db.Model):
     user_name = db.Column(db.String(20), info='上报人')
     description = db.Column(db.String(255, 'utf8_general_ci'), info='损坏的描述')
     methods = db.Column(db.String(255), info='处理方法，是个json格式')
+    who = db.Column(db.String(50), info='责任人')
 
 
 ## 实用工具

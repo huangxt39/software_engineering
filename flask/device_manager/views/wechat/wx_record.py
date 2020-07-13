@@ -40,21 +40,23 @@ def get_record():
             timeout = []
             waiting2obtain = []
             items = res.items
-            for i in range(len(items)):
-                if items[i].state=="进行中" and items[i].book_return_time < datetime.now():
-                    timeout.append(1)
-                else:
-                    timeout.append(0)
-                if items[i].state=="未开始" and items[i].book_borrow_time < datetime.now():
-                    waiting2obtain.append(1)
-                else:
-                    waiting2obtain.append(0)
-            items = query2dict(items)
-            for i in range(len(items)):
-                items[i]["timeout"] = timeout[i]  
-                items[i]["waiting2obtain"] = waiting2obtain[i]
+            if len(items):
+                for i in range(len(items)):
+                    if items[i].state=="进行中" and items[i].book_return_time < datetime.now():
+                        timeout.append(1)
+                    else:
+                        timeout.append(0)
+                    if items[i].state=="未开始" and items[i].book_borrow_time < datetime.now():
+                        waiting2obtain.append(1)
+                    else:
+                        waiting2obtain.append(0)
+                items = query2dict(items)
+                for i in range(len(items)):
+                    items[i]["timeout"] = timeout[i]  
+                    items[i]["waiting2obtain"] = waiting2obtain[i]
+            
             return_dict["result"] = items
-            return_dict["pages"] = res.total
+            return_dict["total"] = res.total
             return_dict["pages"] =  res.pages
             return_dict["code"] = 1
         else:
@@ -118,7 +120,8 @@ def add():
                 book_borrow_time = datetime.strptime(book_borrow_time,'%Y-%m-%d')
                 book_return_time = datetime.strptime(book_return_time,'%Y-%m-%d') + timedelta(days=1)
                 # book_return_time = book_borrow_time + timedelta(days=30)
-                borrow_cost = float(real_cost) * (book_return_time - book_borrow_time).days
+                borrow_cost = float(real_cost)
+                # borrow_cost = float(real_cost) * (book_return_time - book_borrow_time + timedelta(seconds=2)).days
                 
                 if user_now.money >= borrow_cost:
                     if device_type.available_num > num:
@@ -221,6 +224,7 @@ def cancel_record():
                 this_user.money = float(this_user.money) + (1 - 0.01 *  float(params["订单取消惩罚比例"])) * float(record.cost)
                 db.session.commit()
                 return_dict["code"] = 1
+                return_dict["return_money"] = (1 - 0.01 *  float(params["订单取消惩罚比例"])) * float(record.cost)
                 return_dict["info"] = "成功了，你的订单已经取消了,但你扣了60%的钱"
             # elif record.state_id == 1:
             #     record.state_id = 2 # 已结束
@@ -296,6 +300,7 @@ def damage_report():
     record_id = request.values.get("record_id")
     device_id = request.values.get("device_id")
     description = request.values.get("description")
+    who = request.values.get("who")
 
     submit_time = datetime.now()
     if device_id:
@@ -315,18 +320,36 @@ def damage_report():
             new_demage_device.user_id = user_id
             new_demage_device.device_type_id = record.device_type
             new_demage_device.user_name = user_now.user_name
+            new_demage_device.who = who
             new_demage_device.demage_state_id = 0
             methods = json.dumps({"追查责任人":0,"联系维修师傅":0,"惩罚损坏人":0}, cls=DateEncoder, ensure_ascii=False)
             new_demage_device.methods = methods
             new_demage_device.description = description
+            if record.state_id == 0:
+                record.num = record.num - 1
+                if record.num == 0:
+                    record.state_id = 2
             return_dict["info"] = "上报成功" # 
-            return_dict["code"] = 1 # 老哥，你为什么不输入id呢
+            return_dict["code"] = 1 
             db.session.add(new_demage_device)
             db.session.commit()
         else:
             return_dict["info"] = "没有这个用户或者订单" # 
-            return_dict["code"] = -1 # 老哥，你为什么不输入id呢
+            return_dict["code"] = -1 
     else:
         return_dict["info"] = "老哥，你为什么不输入id呢" # 
-        return_dict["code"] = 0 # 老哥，你为什么不输入id呢
+        return_dict["code"] = 0 
     return jsonify(return_dict)
+
+# @scheduler.task('interval', id='interval_record', seconds=10 ) # day='last sun'
+@scheduler.task('cron', id='interval_record', hour="1", minute='1' ) # day='last sun'
+def interval_record():
+    with scheduler.app.app_context:
+        res =db.session.query(Borrow_record).filter(Borrow_record.state_id == 0).all()
+        for i in range(len(res)):
+            if res[i].book_return_time < datetime.now():
+                this_user = db.session.query(User).filter(User.user_id==res[i].user_id).first()
+                this_user.violate = this_user.violate + 1
+                res[i].state_id = 2
+        db.session.commit()
+

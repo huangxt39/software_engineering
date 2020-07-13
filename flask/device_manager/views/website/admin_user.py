@@ -71,7 +71,7 @@ def user_query():
                 res = db.session.query(User.wxid, User_type.user_type_name,\
                     User.user_name, User.phone, User.email, User.photo,\
                         User.bor_now, User.bor_history, User.violate,\
-                            User.description).\
+                            User.description, User.money).\
                     filter(User.user_type == User_type.user_type_id).\
                         filter(User.user_id.like(user_id+"%")).paginate(page, per_page, error_out=False)
             else:

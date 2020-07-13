@@ -22,7 +22,8 @@ def login():
     except:
         return jsonify({"code":-1,"info":"解码错误"})
     res =  db.session.query(User.wxid, User_type.user_type_name,\
-        User.user_id, User.user_name, User.phone, User.email, User.photo).\
+        User.user_id, User.user_name, User.phone, User.email, User.photo,\
+        User.money, User.violate, User.bor_now, User.bor_history, User.description).\
             filter(User.wxid == openid).\
             filter(User.user_type == User_type.user_type_id).all()
     if len(res) == 1:
@@ -44,7 +45,7 @@ def signup():
     email = request.values.get("email")
     photo = request.values.get("photo")
     phone = request.values.get("phone")
-
+    description = request.values.get("description")
     platCode = request.values.get("platCode")
     platUserInfoMap = request.values.get("platUserInfoMap")
 
@@ -81,6 +82,10 @@ def signup():
     new_user.phone = phone 
     new_user.wxid = openid 
     new_user.money = type_info.wages
+    new_user.bor_now = 0
+    new_user.bor_history = 0
+    new_user.violate = 0
+    new_user.description = description
     db.session.add(new_user)
     db.session.commit()
 

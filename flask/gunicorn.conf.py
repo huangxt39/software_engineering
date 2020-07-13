@@ -11,8 +11,8 @@ bind = "0.0.0.0:80"
 # 设置进程文件目录
 # pidfile = '/var/run/gunicorn.pid'
 # 设置访问日志和错误信息日志路径
-accesslog = '/root/flask/gunicorn_acess.log'
-errorlog = '/root/flask/gunicorn_info.log'
+accesslog = '/root/flask/log/gunicorn_acess.log'
+errorlog = '/root/flask/log/gunicorn_info.log'
 # 设置日志记录水平
 loglevel = 'info'
 

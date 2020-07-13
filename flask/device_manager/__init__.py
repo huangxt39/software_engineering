@@ -1,6 +1,6 @@
 from flask import Flask
 from werkzeug.utils import import_string
-from device_manager.models import db #, scheduler
+from device_manager.models import db , scheduler
 import device_manager.utils.global_var as gol
 from flask_cors import *
 import platform
@@ -45,7 +45,7 @@ def create_app():
     
     CORS(app, supports_credentials=True)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@108.166.209.115:3306/设备管理?charset=utf8'  #连接的数据库
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@%s:3306/设备管理?charset=utf8'%root  #连接的数据库
     # app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True  # 自动commit #2.0之后被下面的配置代替了
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True  # 每次请求结束时自动commit数据库修改
     app.config["SQLALCHEMY_ECHO"] = False   # 如果设置成 True，SQLAlchemy将会记录所有发到标准输出(stderr)的语句,这对调试很有帮助.
@@ -55,11 +55,12 @@ def create_app():
     app.config['SQLALCHEMY_BINDS'] = SQLALCHEMY_BINDS # 额外连接的数据库
 
     app.config['JSON_AS_ASCII'] = False # json.jsonify支持中文解析
+    app.config['SCHEDULER_API_ENABLED'] = True
     
     app.debug = True # 开启debug模式
 
-    # scheduler.init_app(app)
-    # scheduler.start()
+    scheduler.init_app(app)
+    scheduler.start()
     
     db.init_app(app) # 注册数据库
     db.reflect(app=app)  # 映射已有数据库

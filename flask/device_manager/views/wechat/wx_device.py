@@ -19,9 +19,10 @@ def get_image():
     print(path)
     if os.path.isfile(path):
         img_stream = return_img_stream(path)
+        return img_stream
     else:
         return_dict["code"] = -1
-    return img_stream
+    return jsonify(return_dict)
 
 @wx_device.route('/device_type', methods=['GET'])
 def device_big_type():
@@ -37,8 +38,12 @@ def type_name():
     big_type = request.values.get("big_type_id")
     res = db.session.query(Device_information.type_id,Device_information.device_name, Device_information.image).\
         filter(Device_information.big_type_id == big_type).all()
-    return_dict["code"] = 1
-    return_dict["result"] = query2dict(res)
+    if len(res):
+        return_dict["code"] = 1
+        return_dict["result"] = query2dict(res)
+    else:
+        return_dict["result"] = []
+        return_dict["code"] = 0
     return jsonify(return_dict)
 
 @wx_device.route('/get_device', methods=['GET','POST'])
@@ -51,7 +56,7 @@ def get_device():
     res = db.session.query(Device_information.type_id, Device_information.device_name, Device_information.total_num, Device_information.available_num,\
         Device_information.description, Device_information.image, Device_information.real_cost, Device_information.cost, Device_information.index1, Device_information.index2, \
             Device_information.student_limit, Device_information.student_limit_time, Device_information.teacher_limit, Device_information.teacher_limit_time,\
-                Device_big_type.big_type_name).filter(Device_information.big_type_id == Device_big_type.big_type_id).\
+                Device_big_type.big_type_name, Device_information.appendix).filter(Device_information.big_type_id == Device_big_type.big_type_id).\
                     filter(Device_information.type_id == type_id).all()
 
     if len(res) != 1:

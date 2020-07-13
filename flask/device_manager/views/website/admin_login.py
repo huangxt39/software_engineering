@@ -7,9 +7,9 @@ from flask import Blueprint
 admin_login=Blueprint('admin_login',__name__)
 
 
-@admin_login.route('/', methods=['GET'])
-def demo1():
-    return render_template('pratice/Login/login.html', input_text = '', res_text = '')
+# @admin_login.route('/', methods=['GET'])
+# def demo1():
+#     return render_template('pratice/Login/login.html', input_text = '', res_text = '')
 
 
 @admin_login.route('/login', methods=['GET', 'POST'])

@@ -9,9 +9,9 @@ services:
         ports:
             - "5000:80"
         volumes:
-          - /root/flask_noNginx/device_manager:/root/flask/device_manager
-          - /root/flask_noNginx/gunicorn.conf.py:/root/flask/gunicorn.conf.py
-          - /root/flask_noNginx/log:/root/flask/log
+          - /root/flask/device_manager:/root/flask/device_manager
+          - /root/flask/gunicorn.conf.py:/root/flask/gunicorn.conf.py
+          - /root/flask/log:/root/flask/log
         links: 
             - mysql:mysql
         
